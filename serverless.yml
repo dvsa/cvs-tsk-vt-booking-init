@@ -1,0 +1,18 @@
+service: cvs-tsk-vt-booking-init
+useDotenv: true
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+provider:
+  region: eu-west-1
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  dynamicsBooking:
+    handler: src/handler/dynamics.handler
+    events:
+      - http:
+          path: booking
+          method: post

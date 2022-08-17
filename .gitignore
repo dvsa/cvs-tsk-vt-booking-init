@@ -106,3 +106,8 @@ dist
 
 # MAC files
 .DS_Store
+
+.build
+.vscode
+.github
+.reports

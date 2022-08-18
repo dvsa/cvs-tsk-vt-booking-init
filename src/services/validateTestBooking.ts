@@ -1,8 +1,6 @@
 import Joi from 'joi';
-import logger from '../util/logger';
 
 export async function validateTestBooking(testBooking: unknown): Promise<unknown> {
-  logger.info('validateTestBooking starting');
   const schema = Joi.object({
     name: Joi.string().required(),
     bookingDate: Joi.string().required(),

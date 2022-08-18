@@ -53,17 +53,20 @@ mocked(mEventBridgeInstance.putEvents as PutEventsWithParams).mockImplementation
 
 describe('Send events', () => {
   describe('Events sent', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
     it('GIVEN one event to send WHEN sent THEN one event is returned.', async () => {
-      const dynamicsBooking = <IDynamicsBooking>(<unknown>{ name: 'Success!' });
+      const dynamicsBooking = [<IDynamicsBooking>(<unknown>{ name: 'Success!' })];
       const mSendResponse: ISendResponse = { SuccessCount: 1, FailCount: 0 };
       await expect(sendBooking(dynamicsBooking)).resolves.toEqual(
         mSendResponse,
       );
     });
     it('GIVEN an issue with eventbridge WHEN 1 event fails THEN the failure is in the response.', async () => {
-      const errorDynamicsBooking = <IDynamicsBooking>(
+      const errorDynamicsBooking = [<IDynamicsBooking>(
         (<unknown>{ name: 'Error', bookingDate: 'Error' })
-      );
+      )];
       const mSendResponse: ISendResponse = { SuccessCount: 0, FailCount: 1 };
       await expect(sendBooking(errorDynamicsBooking)).resolves.toEqual(
         mSendResponse,

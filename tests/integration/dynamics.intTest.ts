@@ -46,7 +46,7 @@ describe('Handler integration test', () => {
 
     expect(result).toEqual({
       statusCode: 201,
-      body: 'Successfully sent booking to EventBridge',
+      body: 'Successfully sent 1 booking to EventBridge',
     });
     expect(putEventsFn).toHaveBeenCalledTimes(1);
     expect(putEventsFn).toHaveBeenNthCalledWith(1, mDynamicsEvent);
@@ -61,7 +61,7 @@ describe('Handler integration test', () => {
 
     expect(result).toEqual({
       statusCode: 400,
-      body: 'Received event failed validation: ValidationError: "name" is required. "bookingDate" is required. "vrm" is required. "testCode" is required. "testDate" is required. "pNumber" is required',
+      body: 'Following line items failed validation [{}]',
     });
     expect(putEventsFn).toHaveBeenCalledTimes(0);
   });
@@ -75,7 +75,7 @@ describe('Handler integration test', () => {
 
     expect(result).toEqual({
       statusCode: 500,
-      body: 'Failed to send booking to EventBridge, please see logs for details',
+      body: 'Failed to send 1 booking to EventBridge, please see logs for details',
     });
     expect(putEventsFn).toHaveBeenCalledTimes(1);
     expect(putEventsFn).toHaveBeenNthCalledWith(1, mDynamicsFailedEvent);

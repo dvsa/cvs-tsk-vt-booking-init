@@ -27,7 +27,7 @@ export const handler = async (
     logger.error('', error);
     return Promise.resolve({
       statusCode: 400,
-      body: `Received event failed validation: ${JSON.stringify(error)}`,
+      body: `Received event failed validation: ${error}`,
     });
   }
 

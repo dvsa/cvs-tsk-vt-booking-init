@@ -22,12 +22,13 @@ export const handler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     await validateTestBooking(JSON.parse(event.body));
+    logger.info('validateTestBooking ending');
   } catch (error: unknown) {
     logger.error('Request body failed validation');
     logger.error('', error);
     return Promise.resolve({
       statusCode: 400,
-      body: `Received event failed validation: ${error}`,
+      body: `Received event failed validation: ${error as string}`,
     });
   }
 

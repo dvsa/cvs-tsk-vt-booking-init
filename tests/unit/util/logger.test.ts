@@ -4,7 +4,7 @@ import { EOL } from 'os';
 
 process.env.LOG_LEVEL = 'debug';
 // eslint-disable-next-line import/first
-import logger from '../../src/util/logger';
+import logger from '../../../src/util/logger';
 
 describe('logger functions', () => {
   it('GIVEN a logger WHEN an info is logged THEN the console message is correct.', () => {

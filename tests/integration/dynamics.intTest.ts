@@ -2,6 +2,7 @@ import { Context } from 'aws-lambda';
 //import MockDate from 'mockdate';
 import { handler } from '../../src/handler/dynamics';
 import { mDynamicsEvent } from './resources/mDynamicsEvent';
+import { mDynamicsFailedEvent } from './resources/mDynamicsFailedEvent';
 import { mDynamicsRequest } from './resources/mDynamicsRequest';
 import { mDynamicsInvalidRequest } from './resources/mDynamicsInvalidRequest';
 import { mDynamicsFailedRequest } from './resources/mDynamicsFailedRequest';
@@ -77,5 +78,6 @@ describe('Handler integration test', () => {
       body: 'Failed to send booking to EventBridge, please see logs for details',
     });
     expect(putEventsFn).toHaveBeenCalledTimes(1);
+    expect(putEventsFn).toHaveBeenNthCalledWith(1, mDynamicsFailedEvent);
   });
 });

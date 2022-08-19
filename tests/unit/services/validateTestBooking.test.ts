@@ -19,9 +19,9 @@ describe('validatTestBooking', () => {
     await expect(t(4)).rejects.toThrow('\"[0].vrm\" must be a string. \"[0].pNumber\" is required');       
   });
   it('throws error when date fields aren`t dates', async () => {
-    await expect(t(5)).rejects.toThrow('\"[0].bookingDate\" must be in YYYY-MM-DD format. \"[0].testDate\" must be in YYYY-MM-DD forma')
-  })
+    await expect(t(5)).rejects.toThrow('\"[0].bookingDate\" must be in YYYY-MM-DD format. \"[0].testDate\" must be in YYYY-MM-DD forma');
+  });
   it('throws error if parameters are above character limit', async () => {
-    await expect(t(6)).rejects.toThrow('\"[0].name\" length must be less than or equal to 10 characters long. \"[0].testCode\" length must be less than or equal to 3 characters long. \"[0].pNumber\" length must be less than or equal to 6 characters long')
-  })
+    await expect(t(6)).rejects.toThrow('\"[0].name\" length must be less than or equal to 10 characters long. \"[0].testCode\" length must be less than or equal to 3 characters long. \"[0].pNumber\" length must be less than or equal to 6 characters long');
+  });
 });

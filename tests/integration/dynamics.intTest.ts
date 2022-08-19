@@ -7,7 +7,7 @@ import { mDynamicsInvalidRequest } from './resources/mDynamicsInvalidRequest';
 import { mDynamicsFailedRequest } from './resources/mDynamicsFailedRequest';
 import { mDynamicsMultipleRequest } from './resources/mDynamicsMultipleRequest';
 import { PutEventsRequest } from 'aws-sdk/clients/eventbridge';
-import validateTestBooking from '../../src/services/validateTestBooking'
+import validateTestBooking from '../../src/services/validateTestBooking';
 import { mocked } from 'ts-jest/utils';
 
 
@@ -37,8 +37,8 @@ jest.mock('aws-sdk', () => ({
   })),
 }));
 
-const mValidateTestBooking = mocked(validateTestBooking, true)
-jest.mock('../../src/services/validateTestBooking')
+const mValidateTestBooking = mocked(validateTestBooking, true);
+jest.mock('../../src/services/validateTestBooking');
 
 const mockDate = new Date('2022-01-01');
 jest
@@ -51,7 +51,7 @@ describe('Handler integration test', () => {
   });
 
   it('GIVEN all external resources are mocked WHEN called with valid request with 1 line item THEN the mocked data is transformed and pushed to EventBridge', async () => {
-    mValidateTestBooking.mockImplementationOnce(() => undefined)
+    mValidateTestBooking.mockImplementationOnce(() => undefined);
 
     const result = await handler(mDynamicsRequest, context);
 
@@ -64,7 +64,7 @@ describe('Handler integration test', () => {
   });
 
   it('GIVEN all external resources are mocked WHEN called with valid request with 3 line item THEN the mocked data is transformed and pushed to EventBridge', async () => {
-    mValidateTestBooking.mockImplementationOnce(() => undefined)
+    mValidateTestBooking.mockImplementationOnce(() => undefined);
 
     const result = await handler(mDynamicsMultipleRequest, context);
 
@@ -79,7 +79,7 @@ describe('Handler integration test', () => {
   });
 
   it('GIVEN all external resources are mocked WHEN called with invalid request THEN return 400 bad request error and not push event to EventBridge', async () => {
-    mValidateTestBooking.mockImplementationOnce(() => {throw Error()})
+    mValidateTestBooking.mockImplementationOnce(() => {throw Error();});
 
     const result = await handler(mDynamicsInvalidRequest, context);
 
@@ -91,7 +91,7 @@ describe('Handler integration test', () => {
   });
 
   it('GIVEN all external resources are mocked WHEN called with valid request but fail to push to EventBridge THEN return 500 bad request error', async () => {
-    mValidateTestBooking.mockImplementationOnce(() => undefined)
+    mValidateTestBooking.mockImplementationOnce(() => undefined);
 
     const result = await handler(mDynamicsFailedRequest, context);
 

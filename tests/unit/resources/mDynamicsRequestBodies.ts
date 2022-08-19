@@ -44,7 +44,7 @@ export const GetRequestBody = (i: number): IDynamicsBooking[] => {
         testCode: '123',
         testDate: 'Im not a date',
         pNumber: '123456',
-      }]
+      }];
     case 6:
       return [<IDynamicsBooking>{
         name: 'helloooooooooooo',
@@ -53,7 +53,7 @@ export const GetRequestBody = (i: number): IDynamicsBooking[] => {
         testCode: '1234',
         testDate: '2022-01-01',
         pNumber: '22222222222222',
-      }]
+      }];
     default:
       return [<IDynamicsBooking>{}];
   }

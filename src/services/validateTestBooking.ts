@@ -1,5 +1,7 @@
-const Joi = require('joi')
-    .extend(require('@joi/date'));
+import * as JoiImport from 'joi';
+import JoiDateFactory from '@joi/date';
+
+const Joi = JoiImport.extend(JoiDateFactory) as unknown as JoiImport.Root;
 
 export default async function validateTestBooking(testBooking: unknown): Promise<unknown> {
   const schema = Joi.array().items(Joi.object().keys({

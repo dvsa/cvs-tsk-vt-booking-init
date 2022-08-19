@@ -6,7 +6,7 @@ import type {
 } from 'aws-lambda';
 import { sendBooking } from '../services/eventbridge';
 import { IDynamicsBooking } from '../interfaces/IDynamicsBooking';
-import { validateTestBooking } from '../services/validateTestBooking';
+import validateTestBooking from '../services/validateTestBooking';
 import logger from '../util/logger';
 
 /**

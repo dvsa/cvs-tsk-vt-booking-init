@@ -1,4 +1,4 @@
-import { validateTestBooking } from '../../../src/services/validateTestBooking';
+import validateTestBooking from '../../../src/services/validateTestBooking';
 import { GetRequestBody } from '../resources/mDynamicsRequestBodies';
 
 async function t(request: number) {
@@ -18,4 +18,10 @@ describe('validatTestBooking', () => {
   it('throws error showing multiple errors in validation', async () => {
     await expect(t(4)).rejects.toThrow('\"[0].vrm\" must be a string. \"[0].pNumber\" is required');       
   });
+  it('throws error when date fields aren`t dates', async () => {
+    await expect(t(5)).rejects.toThrow('\"[0].bookingDate\" must be in YYYY-MM-DD format. \"[0].testDate\" must be in YYYY-MM-DD forma')
+  })
+  it('throws error if parameters are above character limit', async () => {
+    await expect(t(6)).rejects.toThrow('\"[0].name\" length must be less than or equal to 10 characters long. \"[0].testCode\" length must be less than or equal to 3 characters long. \"[0].pNumber\" length must be less than or equal to 6 characters long')
+  })
 });

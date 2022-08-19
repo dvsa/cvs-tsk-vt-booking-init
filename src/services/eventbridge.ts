@@ -20,7 +20,7 @@ const sendBooking = async (
   for (const lineItem of lineItems) {
     // eslint-disable-next-line security/detect-object-injection
     logger.info(
-      `sending test booking with test date ${lineItem.testDate} for test station ${lineItem.pNumber} to eventbridge...`,
+      `sending test booking with test date ${lineItem.testDate} for vehicle ${lineItem.vrm} at test station ${lineItem.pNumber} to eventbridge...`,
     );
 
     try {

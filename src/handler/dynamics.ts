@@ -5,8 +5,9 @@ import type {
   Context,
 } from 'aws-lambda';
 import { sendBooking } from '../services/eventbridge';
-import { validateRequest } from '../services/validateRequest';
 import { IDynamicsBooking } from '../interfaces/IDynamicsBooking';
+import { validateTestBooking } from '../services/validateTestBooking';
+import logger from '../util/logger';
 
 /**
  * Handler for vehicle bookings received from Dynamics CE via API Gateway
@@ -19,15 +20,24 @@ export const handler = async (
   event: APIGatewayProxyEvent,
   _context: Context,
 ): Promise<APIGatewayProxyResult> => {
-  const validationError = await validateRequest(event);
-  if (validationError) return Promise.resolve({
+  if (!event.body) return Promise.resolve({
     statusCode: 400,
-    body: validationError,
+    body: 'No body in request',
   });
 
-  const payload = JSON.parse(event.body) as unknown as IDynamicsBooking[];
+  try {
+    await validateTestBooking(JSON.parse(event.body));
+    logger.info('validateTestBooking ending');
+  } catch (error: unknown) {
+    logger.error('Request body failed validation');
+    logger.error('', error);
+    return Promise.resolve({
+      statusCode: 400,
+      body: `Received event failed validation: ${error as string}`,
+    });
+  }
 
-  const result = await sendBooking(payload);
+  const result = await sendBooking(JSON.parse(event.body) as unknown as IDynamicsBooking[]);
 
   if (result.FailCount >= 1) {
     return Promise.resolve({

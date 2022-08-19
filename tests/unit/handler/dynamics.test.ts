@@ -6,6 +6,7 @@ import { mDynamicsInvalidRequest } from '../../integration/resources/mDynamicsIn
 import { mDynamicsInvalidRequest2 } from '../../integration/resources/mDynamicsInvalidRequest2';
 import { mDynamicsRequest } from '../../integration/resources/mDynamicsRequest';
 import { mDynamicsFailedRequest } from '../../integration/resources/mDynamicsFailedRequest';
+import { mDynamicsEmptyBodyRequest } from '../../integration/resources/mDynamicsEmptyBodyRequest';
 
 jest.mock('../../../src/services/eventbridge', () => ({
   sendBooking: jest
@@ -19,6 +20,17 @@ const context: Context = <Context>{};
 describe('dynamics handler tests', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  it('receives empty body in request and returns 400 bad request', async () => {
+    const result = await handler(mDynamicsEmptyBodyRequest, context);
+
+    expect(sendBooking).toHaveBeenCalledTimes(0);
+
+    expect(result).toEqual({
+      statusCode: 400,
+      body: 'No body in request',
+    });
   });
 
   it('passes JSON object from valid dynamics request body to sendBooking method', async () => {
@@ -39,7 +51,7 @@ describe('dynamics handler tests', () => {
 
     expect(result).toEqual({
       statusCode: 400,
-      body: 'Line items must come in form of array',
+      body: 'Received event failed validation: ValidationError: \"value\" must be an array',
     });
   });
 
@@ -54,7 +66,7 @@ describe('dynamics handler tests', () => {
 
     expect(result).toEqual({
       statusCode: 400,
-      body: 'Following line items failed validation [{}]',
+      body: 'Received event failed validation: ValidationError: \"[0].name\" is required. \"[0].bookingDate\" is required. \"[0].vrm\" is required. \"[0].testCode\" is required. \"[0].testDate\" is required. \"[0].pNumber\" is required',
     });
   });
 

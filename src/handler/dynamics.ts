@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import type {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
@@ -24,6 +23,11 @@ export const handler = async (
     statusCode: 400,
     body: 'No body in request',
   });
+
+  if (event.httpMethod !== "POST") return Promise.resolve({
+    statusCode: 400,
+    body: `Invalid path: ${event.httpMethod} ${event.path}`
+  })
 
   try {
     await validateTestBooking(JSON.parse(event.body));
@@ -51,3 +55,4 @@ export const handler = async (
     body: `Successfully sent ${result.SuccessCount} booking${result.SuccessCount > 1 ? 's' : ''} to EventBridge`,
   });
 };
+

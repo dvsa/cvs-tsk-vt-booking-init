@@ -7,6 +7,7 @@ import { mDynamicsInvalidRequest2 } from '../../integration/resources/mDynamicsI
 import { mDynamicsRequest } from '../../integration/resources/mDynamicsRequest';
 import { mDynamicsFailedRequest } from '../../integration/resources/mDynamicsFailedRequest';
 import { mDynamicsEmptyBodyRequest } from '../../integration/resources/mDynamicsEmptyBodyRequest';
+import { mDynamicsUnavailableRequest } from '../../integration/resources/mDynamicsUnavailableRequest'
 
 jest.mock('../../../src/services/eventbridge', () => ({
   sendBooking: jest
@@ -80,4 +81,15 @@ describe('dynamics handler tests', () => {
       body: 'Failed to send 1 booking to EventBridge, please see logs for details',
     });
   });
+
+  it('receives non-POST request to /vt-booking endpoint, return 400 bad request', async () => {
+    const result = await handler(mDynamicsUnavailableRequest, context);
+
+    expect(sendBooking).toHaveBeenCalledTimes(0);
+
+    expect(result).toEqual({
+      statusCode: 400,
+      body: 'Invalid path: GET NotAvailable',
+    });
+  })
 });

@@ -24,10 +24,10 @@ export const handler = async (
     body: 'No body in request',
   });
 
-  if (event.httpMethod !== "POST") return Promise.resolve({
+  if (event.httpMethod !== 'POST') return Promise.resolve({
     statusCode: 400,
-    body: `Invalid path: ${event.httpMethod} ${event.path}`
-  })
+    body: `Invalid path: ${event.httpMethod} ${event.path}`,
+  });
 
   try {
     await validateTestBooking(JSON.parse(event.body));

@@ -7,7 +7,7 @@ import { mDynamicsInvalidRequest2 } from '../../integration/resources/mDynamicsI
 import { mDynamicsRequest } from '../../integration/resources/mDynamicsRequest';
 import { mDynamicsFailedRequest } from '../../integration/resources/mDynamicsFailedRequest';
 import { mDynamicsEmptyBodyRequest } from '../../integration/resources/mDynamicsEmptyBodyRequest';
-import { mDynamicsUnavailableRequest } from '../../integration/resources/mDynamicsUnavailableRequest'
+import { mDynamicsUnavailableRequest } from '../../integration/resources/mDynamicsUnavailableRequest';
 
 jest.mock('../../../src/services/eventbridge', () => ({
   sendBooking: jest
@@ -91,5 +91,5 @@ describe('dynamics handler tests', () => {
       statusCode: 400,
       body: 'Invalid path: GET NotAvailable',
     });
-  })
+  });
 });

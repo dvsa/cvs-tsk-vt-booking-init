@@ -2,12 +2,7 @@ import { Context } from 'aws-lambda';
 import { handler } from '../../../src/handler/dynamics';
 import { ISendResponse } from '../../../src/interfaces/ISendResponse';
 import { sendBooking } from '../../../src/services/eventbridge';
-import { mDynamicsInvalidRequest } from '../../integration/resources/mDynamicsInvalidRequest';
-import { mDynamicsInvalidRequest2 } from '../../integration/resources/mDynamicsInvalidRequest2';
-import { mDynamicsRequest } from '../../integration/resources/mDynamicsRequest';
-import { mDynamicsFailedRequest } from '../../integration/resources/mDynamicsFailedRequest';
-import { mDynamicsEmptyBodyRequest } from '../../integration/resources/mDynamicsEmptyBodyRequest';
-import { mDynamicsUnavailableRequest } from '../../integration/resources/mDynamicsUnavailableRequest';
+import { mDynamicsRequest, mDynamicsInvalidRequest, mDynamicsInvalidRequest2, mDynamicsFailedRequest, mDynamicsEmptyBodyRequest, mDynamicsUnavailableRequest } from '../../integration/resources/mDynamicsRequests';
 
 jest.mock('../../../src/services/eventbridge', () => ({
   sendBooking: jest

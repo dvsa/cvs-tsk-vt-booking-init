@@ -1,11 +1,7 @@
 import { Context } from 'aws-lambda';
 import { handler } from '../../src/handler/dynamics';
-import { mDynamicsEvent } from './resources/mDynamicsEvent';
-import { mDynamicsFailedEvent } from './resources/mDynamicsFailedEvent';
-import { mDynamicsRequest } from './resources/mDynamicsRequest';
-import { mDynamicsInvalidRequest } from './resources/mDynamicsInvalidRequest';
-import { mDynamicsFailedRequest } from './resources/mDynamicsFailedRequest';
-import { mDynamicsMultipleRequest } from './resources/mDynamicsMultipleRequest';
+import { mDynamicsEvent, mDynamicsFailedEvent } from './resources/mDynamicsEvents';
+import { mDynamicsRequest, mDynamicsInvalidRequest, mDynamicsFailedRequest, mDynamicsMultipleRequest } from './resources/mDynamicsRequests';
 import { PutEventsRequest } from 'aws-sdk/clients/eventbridge';
 import validateTestBooking from '../../src/services/validateTestBooking';
 import { mocked } from 'ts-jest/utils';

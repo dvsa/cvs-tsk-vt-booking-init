@@ -9,8 +9,9 @@
     "build:copy": "find src -type f \\( -name \"*.yml\" -or -name \"*.json\" \\) | cpio -pdm .build && find tests -type f \\( -name \"*.yml\" -or -name \"*.json\" \\)  | cpio -pdm .build",
     "test": "jest --coverage --runInBand",
     "test:ci": "jest --ci --runInBand",
-    "test-i": "echo 'nothing to do for now'",
-    "lint": "eslint '*/**/*.ts' --quiet --fix",
+    "test-i": "npm run test:integration",
+    "test:integration": "BRANCH=local jest --testMatch=\"**/*.intTest.ts\"",
+    "lint": "eslint '*/**/*.ts' --quiet",
     "lint:ci": "eslint '*/**/*.ts'",
     "format": "prettier --write .",
     "audit": "npm audit",
@@ -19,7 +20,7 @@
     "package": "mkdir ${ZIP_NAME} && cp package.json package-lock.json ${ZIP_NAME}/ && cp -r .build/src/* ${ZIP_NAME}/ && cd ${ZIP_NAME} && npm ci --production --ignore-scripts && rm package.json package-lock.json && zip -qr ../${ZIP_NAME}.zip . && cd .. && rimraf ${ZIP_NAME}",
     "prepare": "husky install",
     "tools-setup": "echo 'nothing to do for now'",
-    "invoke": "sls invoke local -f vtBooking -p ./tests/resources/event.json",
+    "invoke": "sls invoke local -f dynamicsBooking -p ./tests/invokeTestEvent.json",
     "commit-msg": "commitlint --edit",
     "pre-commit": "npm run security-checks && npm run audit && npm run format && npm run lint",
     "predeploy": "npm install && npm run prepush",
@@ -27,6 +28,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "aws-sdk": "^2.1188.0",
     "joi": "^17.6.0",
     "winston": "^3.8.1"

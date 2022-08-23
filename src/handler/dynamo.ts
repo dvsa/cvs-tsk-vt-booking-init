@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import type { DynamoDBStreamEvent, Context } from 'aws-lambda';
 import logger from '../util/logger';
 

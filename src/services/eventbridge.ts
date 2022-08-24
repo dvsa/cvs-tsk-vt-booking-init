@@ -25,7 +25,7 @@ const sendBooking = async (
 
     try {
       const entry: IEventEntry = {
-        Source: config.aws.eventBusSource,
+        Source: config.aws.AWS_EVENT_BUS_SOURCE,
         // eslint-disable-next-line security/detect-object-injection
         Detail: JSON.stringify(lineItem),
         DetailType: 'CVS Test Booking',

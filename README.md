@@ -1,7 +1,6 @@
 # cvs-tsk-vt-booking-init
 
 ## Overview
----
 
 This repository contains the source code for two lambdas:
 - `vt-booking-dynamics-init`
@@ -29,7 +28,6 @@ An overview of the architecture for the ATOS booking integration can be found be
 </p>
 
 ## Running the project
----
 
 **Requirements**
 
@@ -51,8 +49,6 @@ vt-booking-dynamo-init
 
 
 ## Testing
----
-
 
 - The [Jest](https://jestjs.io/) framework is used to run tests and collect code coverage
 - To run the tests, run the following command within the root directory of the project: `npm t`
@@ -61,8 +57,6 @@ vt-booking-dynamo-init
 
 
 ## Logging
---- 
-
 
 Logging is handled by `https://github.com/winstonjs/winston`. A pre-configured logger is available, and can be used like so:
 
@@ -75,7 +69,6 @@ logger.warn("Hello world");
 ```
 
 ## Contributing
----
 
 To facilitate the standardisation of the code, a few helpers and tools have been adopted for this repository.
 

@@ -14,5 +14,5 @@ functions:
     handler: src/handler/dynamics.handler
     events:
       - http:
-          path: booking
+          path: vt-booking
           method: post

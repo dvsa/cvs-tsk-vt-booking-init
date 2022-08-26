@@ -1,56 +1,63 @@
-# lambda-starter
+# cvs-tsk-vt-booking-init
 
-A starting pattern for AWS lambda in Typescript
+## Overview
+
+This repository contains the source code for two lambdas:
+- `vt-booking-dynamics-init`
+- `vt-booking-dynamo-init`
+
+Both lambdas are part of initialising the ATOS booking integration process - receiving test booking events from both Dynamics CE (via API gateway) and VTA (via test-results DynamoDB stream events) and extracting the required information from said events to be then processed by the `vt-booking` lambda. 
+
+Both lambdas push a stringified JSON event onto an EventBridge with the format (pre-escaped):
+
+```ts
+{
+  "name": 'hello',
+  "bookingDate": '2022-01-01',
+  "vrm": '12345',
+  "testCode": '123',
+  "testDate": '2022-01-01',
+}
+```
+
+An overview of the architecture for the ATOS booking integration can be found below:
+
+</br>
+<p align="center">
+  <img src="./docs/arch.png" >
+</p>
+
+## Running the project
 
 **Requirements**
 
 - node v14.17.3
-- [SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 - npm 7+
 
-**Prerequisites**
+**Manually testing lambdas**
 
-- Create a `.env`
-  ```shell
-  cp .env.example .env
-  ```
+vt-booking-dynamics-init
+- Build: `npm run build`
+- Start: `npm run start`
+- To invoke the lambda with a test event: `npm run invoke`
+- To invoke the lambda with HTTP request: 
+  - Request: `POST http://localhost:8000/dev/vt-booking`
+  - Body: `[{"name":"hello", "bookingDate":"2022-01-01", "vrm":"12345", "testCode":"123", "testDate":"2022-01-01", "pNumber":"1234"}]`
 
-**Build**
+vt-booking-dynamo-init
+- T.B.C
 
-- `npm i`
-- `npm run build:dev`
 
-**Watch**
-
-To watch for changes and automatically trigger a new build:
-
-- `npm run watch:dev`
-
-**Run Lambdas Locally**
-
-- Build the files first
-- `npm run start:dev`
-- To ensure that the lambdas have been successfully served, run the following command in a separate terminal:
-  - `curl --request GET http://localhost:3000/?message=hello%20world`
-  - the response should be: `{"queryParams": {"message": "hello world"}}`
-- To run CloudWatch Event lambdas: `npm run invoke -- CloudWatchEventLambdaFunction`
-
-**Debug Lambdas Locally (VS Code only)**
-
-- Run lambdas in debug mode: `npm run start:dev -- -d 5858`
-- Add a breakpoint to the lambda being tested (`src/handler/get.ts`)
-- Run the debug config from VS Code that corresponds to lambda being tested (`GetLambdaFunction`)
-- Send an HTTP request to the lambda's URI (`curl --request GET http://localhost:3000/?message=hello%20world`)
-- To debug CloudWatch Event lambdas: `npm run invoke -- CWEventLambdaFunction -d 5858`
-
-**Tests**
+## Testing
 
 - The [Jest](https://jestjs.io/) framework is used to run tests and collect code coverage
-- To run the tests, run the following command within the root directory of the project: `npm test`
+- To run the tests, run the following command within the root directory of the project: `npm t`
 - Coverage results will be displayed on terminal and stored in the `coverage` directory
   - The coverage requirements can be set in `jest.config.js`
 
-**Logging**
+
+## Logging
+
 Logging is handled by `https://github.com/winstonjs/winston`. A pre-configured logger is available, and can be used like so:
 
 ```ts
@@ -61,18 +68,28 @@ logger.error("Hello world");
 logger.warn("Hello world");
 ```
 
-**Tip:** It's usually a good idea to attach the `requestId` and any `X-Correlation-Id` to the logger object's meta data so every log message will contain these useful bits of information.
+## Contributing
 
-```ts
-const event: APIGatewayProxyEvent = currentInvoke.event as APIGatewayProxyEvent;
-const correlationId: string =
-  event.headers["X-Correlation-Id"] ||
-  (currentInvoke.context as Context).awsRequestId;
+To facilitate the standardisation of the code, a few helpers and tools have been adopted for this repository.
 
-const { requestId } = event.requestContext;
+### External dependencies
 
-req.app.locals.correlationId = correlationId;
-req.app.locals.requestId = requestId;
+The projects has multiple hooks configured using [husky](https://github.com/typicode/husky#readme) which will execute the following scripts: `audit`, `lint`, `build`, `test` and format your code with [eslint](https://github.com/typescript-eslint/typescript-eslint#readme) and [prettier](https://github.com/prettier/prettier).
 
-Logger.defaultMeta = { requestId, correlationId };
+You will be required to install [git-secrets](https://github.com/awslabs/git-secrets) (_brew approach is recommended_).
+
+We follow the [conventional commit format](https://www.conventionalcommits.org/en/v1.0.0/) when we commit code to the repository and follow the [angular convention](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#type-enum).
+
+The type is mandatory and must be all lowercase.
+The scope of your commit remain is also mandatory, it must include your ticket number and be all lowercase. The format for the ticket number can be set in the `commitlint.config.js` file.
+
+```js
+// Please see /commitlint.config.js for customised format
+
+type(scope?): subject
+
+// examples
+'chore(cb2-1234): my commit msg' // pass
+'CHORE(cb2-1234): my commit msg' // will fail
+
 ```

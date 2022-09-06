@@ -1,4 +1,4 @@
-import { mocked } from 'ts-jest/utils';
+import { mocked } from 'jest-mock';
 import { handler } from '../../../src/handler/dynamo';
 import { Context, DynamoDBStreamEvent } from 'aws-lambda';
 import { sendBooking } from '../../../src/services/eventbridge';

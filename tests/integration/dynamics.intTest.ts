@@ -4,8 +4,7 @@ import { mDynamicsEvent, mDynamicsFailedEvent } from './resources/mDynamicsEvent
 import { mDynamicsRequest, mDynamicsInvalidRequest, mDynamicsFailedRequest, mDynamicsMultipleRequest } from './resources/mDynamicsRequests';
 import { PutEventsRequest } from 'aws-sdk/clients/eventbridge';
 import validateTestBooking from '../../src/services/validateTestBooking';
-import { mocked } from 'ts-jest/utils';
-
+import { mocked } from 'jest-mock';
 
 const context: Context = <Context>{};
 

@@ -14,6 +14,9 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
               'vrm': {
                 S: 'JY58FPP',
               },
+              'vehicleType': {
+                S: 'psv',
+              },
               'testStationName': {
                 S:'Rowe, Wunsch and Wisoky',
               },

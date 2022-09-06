@@ -3,6 +3,7 @@ import { IBooking } from '../interfaces/IBooking';
 import { DynamoDBStreamEvent } from 'aws-lambda';
 import DynamoDB from 'aws-sdk/clients/dynamodb';
 import logger from '../util/logger';
+import dateFormat from 'dateformat';
 
 const trimTestCode = (testCode: string | undefined): string => {
   if (testCode === undefined) throw new Error('testCode not defined in test result');
@@ -10,10 +11,10 @@ const trimTestCode = (testCode: string | undefined): string => {
   if (testCode.length === 4) {
     if (+testCode[3] !== +testCode[3]) throw new Error(`4th char of test code is non-numeric: ${testCode}`);
 
-    return testCode.slice(0, 3);
+    return testCode.slice(0, 3).toUpperCase();
   } 
 
-  return testCode;
+  return testCode.toUpperCase();
 };
 
 const trimTestStationName = (testStationName: string): string => {
@@ -48,14 +49,15 @@ export const extractVehicleBookings = (event: DynamoDBStreamEvent): IBooking[] =
 
 export const extractBookingDetails = (testResult: ITestResult): IBooking[] => {
   try {
+    console.log(testResult);
     return testResult.testTypes.map((testType) => {
       if (testResult.vehicleType === 'trl') {
         if (testResult.trailerId) return {
           name: trimTestStationName(testResult.testStationName),
-          bookingDate: testResult.testStartTimestamp as string,
+          bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
           vrm: testResult.trailerId,
           testCode: trimTestCode(testType.testCode),
-          testDate: testResult.testStartTimestamp as string,
+          testDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
           pNumber: testResult.testStationPNumber,
         };
         throw new Error('Trailer does not have trailerId available');
@@ -63,10 +65,10 @@ export const extractBookingDetails = (testResult: ITestResult): IBooking[] => {
       
       if (testResult.vrm) return {
         name: trimTestStationName(testResult.testStationName),
-        bookingDate: testResult.testStartTimestamp as string,
+        bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
         vrm: testResult.vrm,
         testCode: trimTestCode(testType.testCode),
-        testDate: testResult.testStartTimestamp as string,
+        testDate: dateFormat(testResult.testStartTimestamp, 'isoDate'), 
         pNumber: testResult.testStationPNumber,
       };
 

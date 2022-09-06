@@ -5,6 +5,10 @@ import { GetDynamoStream } from '../resources/mTestResultRecords';
 jest.mock('../../../src/util/logger');
 
 describe('extractVehicleBooking', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should return array of valid vehicle bookings for psv/hgv', () => {
     const event = GetDynamoStream(1);
 
@@ -13,18 +17,18 @@ describe('extractVehicleBooking', () => {
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
       name:'Rowe, Wuns',
-      bookingDate:'2021-01-14T10:36:33.987Z',
+      bookingDate:'2021-01-14',
       vrm: 'JY58FPP',
-      testDate: '2021-01-14T10:36:33.987Z',
-      testCode: 'ffv',
+      testDate: '2021-01-14',
+      testCode: 'FFV',
       pNumber: '87-1369569',
     });
     expect(result[1]).toEqual({
       name:'Rowe, Wuns',
-      bookingDate:'2021-01-14T10:36:33.987Z',
+      bookingDate:'2021-01-14',
       vrm: 'JY58FPP',
-      testDate: '2021-01-14T10:36:33.987Z',
-      testCode: 'lec',
+      testDate: '2021-01-14',
+      testCode: 'LEC',
       pNumber: '87-1369569',
     });
   });
@@ -37,18 +41,18 @@ describe('extractVehicleBooking', () => {
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
       name:'MyATF',
-      bookingDate:'2021-01-14T10:36:33.987Z',
+      bookingDate:'2021-01-14',
       vrm: 'C000001',
-      testDate: '2021-01-14T10:36:33.987Z',
-      testCode: 'art',
+      testDate: '2021-01-14',
+      testCode: 'ART',
       pNumber: '87-1369569',
     });
     expect(result[1]).toEqual({
       name:'MyATF',
-      bookingDate:'2021-01-14T10:36:33.987Z',
+      bookingDate:'2021-01-14',
       vrm: 'C000001',
-      testDate: '2021-01-14T10:36:33.987Z',
-      testCode: 'aat',
+      testDate: '2021-01-14',
+      testCode: 'AAT',
       pNumber: '87-1369569',
     });
   });

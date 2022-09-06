@@ -1,9 +1,9 @@
-import { IDynamicsBooking } from '../../../src/interfaces/IDynamicsBooking';
+import { IBooking } from '../../../src/interfaces/IBooking';
 
-export const GetRequestBody = (i: number): IDynamicsBooking[] => {
+export const GetRequestBody = (i: number): IBooking[] => {
   switch (i) {
     case 1:
-      return [<IDynamicsBooking>{
+      return [<IBooking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: '12345',
@@ -12,7 +12,7 @@ export const GetRequestBody = (i: number): IDynamicsBooking[] => {
         pNumber: '12345',
       }];
     case 2:
-      return [<IDynamicsBooking>{
+      return [<IBooking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: '12345',
@@ -20,7 +20,7 @@ export const GetRequestBody = (i: number): IDynamicsBooking[] => {
         testDate: '2022-01-01',
       }];
     case 3:
-      return [<IDynamicsBooking>{
+      return [<IBooking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: 12345 as unknown,
@@ -29,7 +29,7 @@ export const GetRequestBody = (i: number): IDynamicsBooking[] => {
         pNumber: '12345',
       }];
     case 4:
-      return [<IDynamicsBooking>{
+      return [<IBooking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: 12345 as unknown,
@@ -37,7 +37,7 @@ export const GetRequestBody = (i: number): IDynamicsBooking[] => {
         testDate: '2022-01-01',
       }];
     case 5:
-      return [<IDynamicsBooking>{
+      return [<IBooking>{
         name: 'hello',
         bookingDate: 'Im not a date',
         vrm: '12345',
@@ -46,7 +46,7 @@ export const GetRequestBody = (i: number): IDynamicsBooking[] => {
         pNumber: '123456',
       }];
     case 6:
-      return [<IDynamicsBooking>{
+      return [<IBooking>{
         name: 'helloooooooooooo',
         bookingDate: '2022-01-01',
         vrm: '12345',
@@ -55,6 +55,6 @@ export const GetRequestBody = (i: number): IDynamicsBooking[] => {
         pNumber: '22222222222222',
       }];
     default:
-      return [<IDynamicsBooking>{}];
+      return [<IBooking>{}];
   }
 };

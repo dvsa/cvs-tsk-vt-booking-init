@@ -1,14 +1,14 @@
 import { EventBridge } from 'aws-sdk';
 import { IEventEntry } from '../interfaces/IEventEntry';
 import { IEntries } from '../interfaces/IEntries';
-import { IDynamicsBooking } from '../interfaces/IDynamicsBooking';
+import { IBooking } from '../interfaces/IBooking';
 import { ISendResponse } from '../interfaces/ISendResponse';
 import logger from '../util/logger';
 import config from '../config';
 
 const eventbridge = new EventBridge();
 const sendBooking = async (
-  lineItems: IDynamicsBooking[],
+  lineItems: IBooking[],
 ): Promise<ISendResponse> => {
   const sendResponse: ISendResponse = {
     SuccessCount: 0,
@@ -36,7 +36,7 @@ const sendBooking = async (
       };
 
       logger.debug(
-        `test booking event about to be sent: ${JSON.stringify(params)}`,
+        `test booking event about to be sent: ${params}`,
       );
       await eventbridge.putEvents(params).promise();
       sendResponse.SuccessCount++;

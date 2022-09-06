@@ -1,4 +1,4 @@
-export interface IDynamicsBooking {
+export interface IBooking {
   name: string;
   bookingDate: string;
   vrm: string;

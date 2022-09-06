@@ -7,7 +7,7 @@ import {
 } from 'aws-sdk/clients/eventbridge';
 import { sendBooking } from '../../../src/services/eventbridge';
 import { ISendResponse } from '../../../src/interfaces/ISendResponse';
-import { IDynamicsBooking } from '../../../src/interfaces/IDynamicsBooking';
+import { IBooking } from '../../../src/interfaces/IBooking';
 
 jest.mock('aws-sdk', () => {
   const mEventBridgeInstance = {
@@ -57,14 +57,14 @@ describe('Send events', () => {
       jest.clearAllMocks();
     });
     it('GIVEN one event to send WHEN sent THEN one event is returned.', async () => {
-      const dynamicsBooking = [<IDynamicsBooking>(<unknown>{ name: 'Success!' })];
+      const dynamicsBooking = [<IBooking>(<unknown>{ name: 'Success!' })];
       const mSendResponse: ISendResponse = { SuccessCount: 1, FailCount: 0 };
       await expect(sendBooking(dynamicsBooking)).resolves.toEqual(
         mSendResponse,
       );
     });
     it('GIVEN an issue with eventbridge WHEN 1 event fails THEN the failure is in the response.', async () => {
-      const errorDynamicsBooking = [<IDynamicsBooking>(
+      const errorDynamicsBooking = [<IBooking>(
         (<unknown>{ name: 'Error', bookingDate: 'Error' })
       )];
       const mSendResponse: ISendResponse = { SuccessCount: 0, FailCount: 1 };

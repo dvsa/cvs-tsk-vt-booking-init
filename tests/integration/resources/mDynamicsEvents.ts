@@ -1,5 +1,5 @@
 import config from '../../../src/config';
-import { IDynamicsBooking } from '../../../src/interfaces/IDynamicsBooking';
+import { IBooking } from '../../../src/interfaces/IBooking';
 import { IEntries } from '../../../src/interfaces/IEntries';
 import { IEventEntry } from '../../../src/interfaces/IEventEntry';
 
@@ -7,7 +7,7 @@ export const mDynamicsEvent: IEntries = <IEntries>{
   Entries: [
     <IEventEntry>{
       Source: config.aws.eventBusSource,
-      Detail: JSON.stringify(<IDynamicsBooking>{
+      Detail: JSON.stringify(<IBooking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: '12345',
@@ -26,7 +26,7 @@ export const mDynamicsFailedEvent: IEntries = <IEntries>{
   Entries: [
     <IEventEntry>{
       Source: config.aws.eventBusSource,
-      Detail: JSON.stringify(<IDynamicsBooking>{
+      Detail: JSON.stringify(<IBooking>{
         name: 'Error',
         bookingDate: '2022-01-01',
         vrm: '12345',

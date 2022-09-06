@@ -55,7 +55,7 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                 S: 'a1b16bae-ae57-4605-96a5-989e0f71f5e3',
               },
               'vehicleType': {
-                S: "trl"
+                S: 'trl',
               },
               'trailerId': {
                 S: 'C000001',
@@ -156,7 +156,7 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                 S: 'a1b16bae-ae57-4605-96a5-989e0f71f5e3',
               },
               'vehicleType': {
-                S: "psv"
+                S: 'psv',
               },
               'testStationName': {
                 S:'MyATF',

@@ -36,7 +36,7 @@ const sendBooking = async (
       };
 
       logger.debug(
-        `test booking event about to be sent: ${params}`,
+        `test booking event about to be sent: ${JSON.stringify(params)}`,
       );
       await eventbridge.putEvents(params).promise();
       sendResponse.SuccessCount++;

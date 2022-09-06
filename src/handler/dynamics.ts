@@ -32,7 +32,7 @@ export const handler = async (
   let booking: unknown;
 
   try {
-    booking = JSON.parse(event.body)
+    booking = JSON.parse(event.body);
     await validateTestBooking(booking);
     logger.info('validateTestBooking ending');
   } catch (error: unknown) {
@@ -44,7 +44,7 @@ export const handler = async (
     });
   }
 
-  const result = await sendBooking(booking as unknown as IBooking[]);
+  const result = await sendBooking(booking as IBooking[]);
 
   if (result.FailCount >= 1) {
     return Promise.resolve({

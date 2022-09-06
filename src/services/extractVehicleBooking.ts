@@ -5,28 +5,28 @@ import DynamoDB from 'aws-sdk/clients/dynamodb';
 import logger from '../util/logger';
 
 const trimTestCode = (testCode: string | undefined): string => {
-  if (testCode === undefined) throw Error("testCode not defined in test result");
+  if (testCode === undefined) throw new Error('testCode not defined in test result');
 
   if (testCode.length === 4) {
-    if (+testCode[3] !== +testCode[3]) throw Error(`4th char of test code is non-numeric: ${testCode}`);
+    if (+testCode[3] !== +testCode[3]) throw new Error(`4th char of test code is non-numeric: ${testCode}`);
 
-    return testCode.slice(0,3);
+    return testCode.slice(0, 3);
   } 
 
   return testCode;
-}
+};
 
 const trimTestStationName = (testStationName: string): string => {
-  if (testStationName.length > 10) return testStationName.slice(0,10);
+  if (testStationName.length > 10) return testStationName.slice(0, 10);
   
   return testStationName;
-}
+};
 
 export const extractVehicleBookings = (event: DynamoDBStreamEvent): IBooking[] => {
   let bookings: IBooking[] = [];
 
   for (const dbRecord of event.Records) {
-    if (dbRecord.eventName !== "INSERT") {
+    if (dbRecord.eventName !== 'INSERT') {
       logger.info(`${dbRecord.eventName} event - ignoring`);
       continue;
     }
@@ -67,11 +67,10 @@ export const extractBookingDetails = (testResult: ITestResult): IBooking[] => {
         pNumber: testResult.testStationPNumber,
       };
       
-      throw Error("Vehicle test result does not contain defined vrm or trailerId");
+      throw new Error('Vehicle test result does not contain defined vrm or trailerId');
     });
-  }
-  catch (error) {
-    logger.error(error)
+  } catch (error) {
+    logger.error(error);
     throw error;
   }
 };

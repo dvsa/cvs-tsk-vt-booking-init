@@ -49,6 +49,7 @@ export const extractVehicleBookings = (event: DynamoDBStreamEvent): Booking[] =>
 
 export const extractBookingDetails = (testResult: TestResult): Booking[] => {
   try {
+    logger.info(`Extracting vehicle booking details for testResultId: ${testResult.testResultId}`)
     return testResult.testTypes.map((testType) => {
       if (testResult.vehicleType === 'trl') {
         if (testResult.trailerId) return {

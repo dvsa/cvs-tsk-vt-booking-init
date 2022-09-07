@@ -14,7 +14,7 @@ export const handler = async (
   event: DynamoDBStreamEvent,
   _context: Context,
 ): Promise<void> => {
-  logger.info('Received event:', JSON.stringify(event, null, 2));
+  logger.info(`Received event: ${JSON.stringify(event, null, 2)}`);
 
   const bookings = extractVehicleBookings(event);
 

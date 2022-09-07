@@ -49,7 +49,7 @@ export const extractVehicleBookings = (event: DynamoDBStreamEvent): Booking[] =>
 
 export const extractBookingDetails = (testResult: TestResult): Booking[] => {
   try {
-    logger.info(`Extracting vehicle booking details for testResultId: ${testResult.testResultId}`)
+    logger.info(`Extracting vehicle booking details for testResultId: ${testResult.testResultId}`);
     return testResult.testTypes.map((testType) => {
       if (testResult.vehicleType === 'trl') {
         if (testResult.trailerId) return {
@@ -75,6 +75,7 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
       throw new Error(`${testResult.vehicleType} does not have associated vrm`);
     });
   } catch (error) {
-    logger.error(`Unable to process test result with ID: ${testResult.testResultId}`, error);
+    logger.error(`Unable to process test result with ID: ${testResult.testResultId}`);
+    logger.error('', error);
   }
 };

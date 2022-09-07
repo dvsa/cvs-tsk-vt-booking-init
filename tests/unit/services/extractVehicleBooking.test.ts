@@ -94,7 +94,7 @@ describe('extractVehicleBooking', () => {
     };
 
     expect(fn).toThrow();
-    expect(logger.error).toHaveBeenLastCalledWith(new Error('psv does not have associated vrm'));
+    expect(logger.error).toHaveBeenLastCalledWith('', new Error('psv does not have associated vrm'));
   });
 
   it('should throw error if 4th char of test code is not numeric - should be the number of axles i.e. a number', () => {
@@ -105,6 +105,6 @@ describe('extractVehicleBooking', () => {
     };
 
     expect(fn).toThrow();
-    expect(logger.error).toHaveBeenLastCalledWith(new Error('4th char of test code is non-numeric: ffva'));
+    expect(logger.error).toHaveBeenLastCalledWith('', new Error('4th char of test code is non-numeric: ffva'));
   });
 });

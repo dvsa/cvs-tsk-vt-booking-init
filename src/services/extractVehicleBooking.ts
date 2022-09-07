@@ -75,7 +75,7 @@ export const extractBookingDetails = (testResult: ITestResult): IBooking[] => {
       throw new Error(`${testResult.vehicleType} does not have associated vrm`);
     });
   } catch (error) {
-    logger.error(error);
+    logger.error('', error);
     throw error;
   }
 };

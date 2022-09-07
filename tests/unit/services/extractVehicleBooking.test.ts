@@ -111,11 +111,11 @@ describe('extractVehicleBooking', () => {
   });
 
   it('should ignore test results that have a status of cancelled', () => {
-    const event = GetDynamoStream(9)
+    const event = GetDynamoStream(9);
 
-    const result = extractVehicleBookings(event)
+    const result = extractVehicleBookings(event);
 
-    expect(result).toEqual([])
-    expect(logger.info).toHaveBeenLastCalledWith('test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3 has a status of cancelled and will not be resulted')
-  })
+    expect(result).toEqual([]);
+    expect(logger.info).toHaveBeenLastCalledWith('test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3 has a status of cancelled and will not be resulted');
+  });
 });

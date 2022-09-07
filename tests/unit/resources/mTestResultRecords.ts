@@ -296,7 +296,7 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                 S:'2021-01-14T10:36:33.987Z',
               },
               'testStatus': {
-                S: 'cancelled'
+                S: 'cancelled',
               },
               'testTypes': {
                 L: [

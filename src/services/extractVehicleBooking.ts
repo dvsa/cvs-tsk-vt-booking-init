@@ -49,7 +49,6 @@ export const extractVehicleBookings = (event: DynamoDBStreamEvent): Booking[] =>
 
 export const extractBookingDetails = (testResult: TestResult): Booking[] => {
   try {
-    console.log(testResult);
     return testResult.testTypes.map((testType) => {
       if (testResult.vehicleType === 'trl') {
         if (testResult.trailerId) return {
@@ -60,7 +59,7 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
           testDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
           pNumber: testResult.testStationPNumber,
         };
-        throw new Error('Trailer does not have trailerId available');
+        throw new Error('trailer does not have trailerId available');
       }
       
       if (testResult.vrm) return {
@@ -75,7 +74,6 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
       throw new Error(`${testResult.vehicleType} does not have associated vrm`);
     });
   } catch (error) {
-    logger.error('', error);
-    throw error;
+    logger.error(`Unable to process test result with ID: ${testResult.testResultId}`, error);
   }
 };

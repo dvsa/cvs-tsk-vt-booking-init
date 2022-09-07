@@ -16,3 +16,8 @@ functions:
       - http:
           path: vt-booking
           method: post
+  dynamoBooking:
+    handler: src/handler/dynamo.handler
+    events:
+      - stream:
+          type: dynamodb

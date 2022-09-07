@@ -271,6 +271,55 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
           },
         }],
       };
+    case 9:
+      return <DynamoDBStreamEvent>{
+        Records: [{
+          eventName: 'INSERT',
+          dynamodb: {
+            NewImage: {
+              'testResultId': {
+                S: 'a1b16bae-ae57-4605-96a5-989e0f71f5e3',
+              },
+              'vrm': {
+                S: 'JY58FPP',
+              },
+              'vehicleType': {
+                S: 'psv',
+              },
+              'testStationName': {
+                S:'Rowe, Wunsch and Wisoky',
+              },
+              'testStationPNumber':{
+                S: '87-1369569',
+              },
+              'testStartTimestamp': {
+                S:'2021-01-14T10:36:33.987Z',
+              },
+              'testStatus': {
+                S: 'cancelled'
+              },
+              'testTypes': {
+                L: [
+                  {
+                    M: {
+                      'testCode': {
+                        S: 'ffv2',
+                      },
+                    },
+                  },
+                  {
+                    M: {
+                      'testCode': {
+                        S: 'lec',
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        }],
+      };
     default:
       return <DynamoDBStreamEvent>{};
   }

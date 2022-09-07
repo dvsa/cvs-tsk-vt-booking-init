@@ -37,7 +37,12 @@ export const extractVehicleBookings = (event: DynamoDBStreamEvent): Booking[] =>
     const newImage = DynamoDB.Converter.unmarshall(dbRecord.dynamodb.NewImage) as TestResult;
     
     if (newImage.testResultId.toLowerCase().includes('legacy')) {
-      logger.info('legacy test result - ignoring');
+      logger.info(`legacy test result with ID ${newImage.testResultId} - ignoring`);
+      continue;
+    }
+
+    if (newImage.testStatus === 'cancelled') {
+      logger.info(`test result with ID: ${newImage.testResultId} has a status of cancelled and will not be resulted`);
       continue;
     }
         

@@ -47,7 +47,7 @@ describe('dynamo handler tests', () => {
 
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).toHaveBeenCalled();
-    expect(logger.info).toHaveBeenNthCalledWith(2, 'Successfully sent 0 bookings to EventBridge');    
+    expect(logger.info).toHaveBeenNthCalledWith(1, 'Successfully sent 0 bookings to EventBridge');    
     expect(logger.error).toHaveBeenNthCalledWith(1, 'Failed to send 1 booking to EventBridge, please see logs for details');    
   });
 });

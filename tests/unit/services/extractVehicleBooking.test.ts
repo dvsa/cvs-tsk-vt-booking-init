@@ -83,7 +83,7 @@ describe('extractVehicleBooking', () => {
     const result = extractVehicleBookings(event);
 
     expect(result).toEqual([]);
-    expect(logger.info).toHaveBeenLastCalledWith('legacy test result - ignoring');
+    expect(logger.info).toHaveBeenLastCalledWith('legacy test result with ID LEGACYa1b16bae-ae57-4605-96a5-989e0f71f5e3 - ignoring');
   });
 
   it('should throw error if no vrm or trailerId is present', () => {
@@ -109,4 +109,13 @@ describe('extractVehicleBooking', () => {
     expect(logger.error).toHaveBeenNthCalledWith(1, 'Unable to process test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3');
     expect(logger.error).toHaveBeenNthCalledWith(2, '', new Error('4th char of test code is non-numeric: ffva'));
   });
+
+  it('should ignore test results that have a status of cancelled', () => {
+    const event = GetDynamoStream(9)
+
+    const result = extractVehicleBookings(event)
+
+    expect(result).toEqual([])
+    expect(logger.info).toHaveBeenLastCalledWith('test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3 has a status of cancelled and will not be resulted')
+  })
 });

@@ -1,4 +1,4 @@
-export interface IBooking {
+export interface Booking {
   name: string;
   bookingDate: string;
   vrm: string;

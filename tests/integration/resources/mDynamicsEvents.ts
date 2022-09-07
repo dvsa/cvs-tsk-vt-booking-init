@@ -1,13 +1,13 @@
 import config from '../../../src/config';
-import { IBooking } from '../../../src/interfaces/IBooking';
-import { IEntries } from '../../../src/interfaces/IEntries';
-import { IEventEntry } from '../../../src/interfaces/IEventEntry';
+import { Booking } from '../../../src/interfaces/Booking';
+import { Entries } from '../../../src/interfaces/Entries';
+import { EventEntry } from '../../../src/interfaces/EventEntry';
 
-export const mDynamicsEvent: IEntries = <IEntries>{
+export const mDynamicsEvent: Entries = <Entries>{
   Entries: [
-    <IEventEntry>{
+    <EventEntry>{
       Source: config.aws.eventBusSource,
-      Detail: JSON.stringify(<IBooking>{
+      Detail: JSON.stringify(<Booking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: '12345',
@@ -22,11 +22,11 @@ export const mDynamicsEvent: IEntries = <IEntries>{
   ],
 };
 
-export const mDynamicsFailedEvent: IEntries = <IEntries>{
+export const mDynamicsFailedEvent: Entries = <Entries>{
   Entries: [
-    <IEventEntry>{
+    <EventEntry>{
       Source: config.aws.eventBusSource,
-      Detail: JSON.stringify(<IBooking>{
+      Detail: JSON.stringify(<Booking>{
         name: 'Error',
         bookingDate: '2022-01-01',
         vrm: '12345',

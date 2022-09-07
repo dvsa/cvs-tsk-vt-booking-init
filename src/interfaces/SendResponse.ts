@@ -1,4 +1,4 @@
-export interface ISendResponse {
+export interface SendResponse {
   SuccessCount: number;
   FailCount: number;
 }

@@ -1,14 +1,14 @@
 import { Context } from 'aws-lambda';
 import { handler } from '../../../src/handler/dynamics';
-import { ISendResponse } from '../../../src/interfaces/ISendResponse';
+import { SendResponse } from '../../../src/interfaces/SendResponse';
 import { sendBooking } from '../../../src/services/eventbridge';
 import { mDynamicsRequest, mDynamicsInvalidRequest, mDynamicsInvalidRequest2, mDynamicsFailedRequest, mDynamicsEmptyBodyRequest, mDynamicsUnavailableRequest } from '../../integration/resources/mDynamicsRequests';
 
 jest.mock('../../../src/services/eventbridge', () => ({
   sendBooking: jest
     .fn()
-    .mockResolvedValueOnce(<ISendResponse>{ SuccessCount: 1 })
-    .mockResolvedValueOnce(<ISendResponse>{ FailCount: 1 }),
+    .mockResolvedValueOnce(<SendResponse>{ SuccessCount: 1 })
+    .mockResolvedValueOnce(<SendResponse>{ FailCount: 1 }),
 }));
 
 const context: Context = <Context>{};

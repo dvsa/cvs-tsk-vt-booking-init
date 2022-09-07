@@ -1,5 +1,5 @@
-import { ITestResult } from '../interfaces/ITestResult';
-import { IBooking } from '../interfaces/IBooking';
+import { TestResult } from '../interfaces/TestResult';
+import { Booking } from '../interfaces/Booking';
 import { DynamoDBStreamEvent } from 'aws-lambda';
 import DynamoDB from 'aws-sdk/clients/dynamodb';
 import logger from '../util/logger';
@@ -23,8 +23,8 @@ const trimTestStationName = (testStationName: string): string => {
   return testStationName;
 };
 
-export const extractVehicleBookings = (event: DynamoDBStreamEvent): IBooking[] => {
-  let bookings: IBooking[] = [];
+export const extractVehicleBookings = (event: DynamoDBStreamEvent): Booking[] => {
+  let bookings: Booking[] = [];
 
   for (const dbRecord of event.Records) {
     if (dbRecord.eventName !== 'INSERT') {
@@ -34,7 +34,7 @@ export const extractVehicleBookings = (event: DynamoDBStreamEvent): IBooking[] =
 
     if (!dbRecord.dynamodb?.NewImage) continue;
     
-    const newImage = DynamoDB.Converter.unmarshall(dbRecord.dynamodb.NewImage) as ITestResult;
+    const newImage = DynamoDB.Converter.unmarshall(dbRecord.dynamodb.NewImage) as TestResult;
     
     if (newImage.testResultId.toLowerCase().includes('legacy')) {
       logger.info('legacy test result - ignoring');
@@ -47,7 +47,7 @@ export const extractVehicleBookings = (event: DynamoDBStreamEvent): IBooking[] =
   return bookings;
 };
 
-export const extractBookingDetails = (testResult: ITestResult): IBooking[] => {
+export const extractBookingDetails = (testResult: TestResult): Booking[] => {
   try {
     console.log(testResult);
     return testResult.testTypes.map((testType) => {

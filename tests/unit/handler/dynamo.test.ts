@@ -2,9 +2,9 @@ import { mocked } from 'jest-mock';
 import { handler } from '../../../src/handler/dynamo';
 import { Context, DynamoDBStreamEvent } from 'aws-lambda';
 import { sendBooking } from '../../../src/services/eventbridge';
-import { ISendResponse } from '../../../src/interfaces/ISendResponse';
+import { SendResponse } from '../../../src/interfaces/SendResponse';
 import { extractVehicleBookings } from '../../../src/services/extractVehicleBooking';
-import { IBooking } from '../../../src/interfaces/IBooking';
+import { Booking } from '../../../src/interfaces/Booking';
 import logger from '../../../src/util/logger';
 
 let context: Context;
@@ -19,8 +19,8 @@ describe('dynamo handler tests', () => {
   });
 
   it('receives valid dynamo stream event, so puts on EventBridge', async () => {
-    mocked(sendBooking).mockResolvedValueOnce(<ISendResponse>{ SuccessCount: 1 });
-    mocked(extractVehicleBookings).mockReturnValueOnce(<IBooking[]>[<IBooking>{}]);
+    mocked(sendBooking).mockResolvedValueOnce(<SendResponse>{ SuccessCount: 1 });
+    mocked(extractVehicleBookings).mockReturnValueOnce(<Booking[]>[<Booking>{}]);
 
     await handler(<DynamoDBStreamEvent>{}, context);
 
@@ -30,7 +30,7 @@ describe('dynamo handler tests', () => {
   });
 
   it('receives event with no booking details, so doesn\'t put on EventBridge', async () => {
-    mocked(extractVehicleBookings).mockReturnValueOnce(<IBooking[]>[]);
+    mocked(extractVehicleBookings).mockReturnValueOnce(<Booking[]>[]);
 
     await handler(<DynamoDBStreamEvent>{}, context);
 
@@ -40,8 +40,8 @@ describe('dynamo handler tests', () => {
   });
 
   it('receives valid dynamo stream event, but fails to put on EventBridge', async () => {
-    mocked(sendBooking).mockResolvedValueOnce(<ISendResponse>{ FailCount: 1, SuccessCount: 0 });
-    mocked(extractVehicleBookings).mockReturnValueOnce(<IBooking[]>[<IBooking>{}]);
+    mocked(sendBooking).mockResolvedValueOnce(<SendResponse>{ FailCount: 1, SuccessCount: 0 });
+    mocked(extractVehicleBookings).mockReturnValueOnce(<Booking[]>[<Booking>{}]);
 
     await handler(<DynamoDBStreamEvent>{}, context);
 

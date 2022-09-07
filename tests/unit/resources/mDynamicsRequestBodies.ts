@@ -1,9 +1,9 @@
-import { IBooking } from '../../../src/interfaces/IBooking';
+import { Booking } from '../../../src/interfaces/Booking';
 
-export const GetRequestBody = (i: number): IBooking[] => {
+export const GetRequestBody = (i: number): Booking[] => {
   switch (i) {
     case 1:
-      return [<IBooking>{
+      return [<Booking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: '12345',
@@ -12,7 +12,7 @@ export const GetRequestBody = (i: number): IBooking[] => {
         pNumber: '12345',
       }];
     case 2:
-      return [<IBooking>{
+      return [<Booking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: '12345',
@@ -20,7 +20,7 @@ export const GetRequestBody = (i: number): IBooking[] => {
         testDate: '2022-01-01',
       }];
     case 3:
-      return [<IBooking>{
+      return [<Booking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: 12345 as unknown,
@@ -29,7 +29,7 @@ export const GetRequestBody = (i: number): IBooking[] => {
         pNumber: '12345',
       }];
     case 4:
-      return [<IBooking>{
+      return [<Booking>{
         name: 'hello',
         bookingDate: '2022-01-01',
         vrm: 12345 as unknown,
@@ -37,7 +37,7 @@ export const GetRequestBody = (i: number): IBooking[] => {
         testDate: '2022-01-01',
       }];
     case 5:
-      return [<IBooking>{
+      return [<Booking>{
         name: 'hello',
         bookingDate: 'Im not a date',
         vrm: '12345',
@@ -46,7 +46,7 @@ export const GetRequestBody = (i: number): IBooking[] => {
         pNumber: '123456',
       }];
     case 6:
-      return [<IBooking>{
+      return [<Booking>{
         name: 'helloooooooooooo',
         bookingDate: '2022-01-01',
         vrm: '12345',
@@ -55,6 +55,6 @@ export const GetRequestBody = (i: number): IBooking[] => {
         pNumber: '22222222222222',
       }];
     default:
-      return [<IBooking>{}];
+      return [<Booking>{}];
   }
 };

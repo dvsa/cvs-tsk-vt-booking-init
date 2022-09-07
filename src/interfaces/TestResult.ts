@@ -1,6 +1,6 @@
 // From test-result lambda https://github.com/dvsa/cvs-svc-test-results/blob/develop/src/models/ITestResult.ts
 
-export interface ITestResult {
+export interface TestResult {
   testResultId: string;
   systemNumber: string;
   testerStaffId: string;

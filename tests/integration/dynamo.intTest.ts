@@ -2,8 +2,8 @@ import { Context } from 'aws-lambda';
 import { PutEventsRequest } from 'aws-sdk/clients/eventbridge';
 import config from '../../src/config';
 import { handler } from '../../src/handler/dynamo';
-import { IEntries } from '../../src/interfaces/IEntries';
-import { IEventEntry } from '../../src/interfaces/IEventEntry';
+import { Entries } from '../../src/interfaces/Entries';
+import { EventEntry } from '../../src/interfaces/EventEntry';
 import logger from '../../src/util/logger';
 import { GetDynamoStream } from '../unit/resources/mTestResultRecords';
 
@@ -51,8 +51,8 @@ describe('Handler integration test', () => {
     await handler(event, context);
 
     expect(putEventsFn).toHaveBeenCalledTimes(2);
-    expect(putEventsFn).toHaveBeenNthCalledWith(1, <IEntries>{
-      Entries: [<IEventEntry>{
+    expect(putEventsFn).toHaveBeenNthCalledWith(1, <Entries>{
+      Entries: [<EventEntry>{
         Source: config.aws.eventBusSource,
         Detail: '{\"name\":\"Rowe, Wuns\",\"bookingDate\":\"2021-01-14\",\"vrm\":\"JY58FPP\",\"testCode\":\"FFV\",\"testDate\":\"2021-01-14\",\"pNumber\":\"87-1369569\"}',
         DetailType: 'CVS Test Booking',
@@ -61,8 +61,8 @@ describe('Handler integration test', () => {
       }],
     });
 
-    expect(putEventsFn).toHaveBeenNthCalledWith(2, <IEntries>{
-      Entries: [<IEventEntry>{
+    expect(putEventsFn).toHaveBeenNthCalledWith(2, <Entries>{
+      Entries: [<EventEntry>{
         Source: config.aws.eventBusSource,
         Detail: '{\"name\":\"Rowe, Wuns\",\"bookingDate\":\"2021-01-14\",\"vrm\":\"JY58FPP\",\"testCode\":\"LEC\",\"testDate\":\"2021-01-14\",\"pNumber\":\"87-1369569\"}',
         DetailType: 'CVS Test Booking',

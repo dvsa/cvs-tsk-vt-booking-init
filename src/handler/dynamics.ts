@@ -4,7 +4,7 @@ import type {
   Context,
 } from 'aws-lambda';
 import { sendBooking } from '../services/eventbridge';
-import { IBooking } from '../interfaces/IBooking';
+import { Booking } from '../interfaces/Booking';
 import validateTestBooking from '../services/validateTestBooking';
 import logger from '../util/logger';
 
@@ -44,7 +44,7 @@ export const handler = async (
     });
   }
 
-  const result = await sendBooking(booking as IBooking[]);
+  const result = await sendBooking(booking as Booking[]);
 
   if (result.FailCount >= 1) {
     return Promise.resolve({

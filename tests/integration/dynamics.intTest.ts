@@ -32,7 +32,7 @@ jest.mock('aws-sdk', () => ({
   })),
 }));
 
-const mValidateTestBooking = mocked(validateTestBooking, true);
+const mValidateTestBooking = mocked(validateTestBooking);
 jest.mock('../../src/services/validateTestBooking');
 
 const mockDate = new Date('2022-01-01');

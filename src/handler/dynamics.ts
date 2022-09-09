@@ -4,7 +4,7 @@ import type {
   Context,
 } from 'aws-lambda';
 import { sendBooking } from '../services/eventbridge';
-import { IDynamicsBooking } from '../interfaces/IDynamicsBooking';
+import { Booking } from '../interfaces/Booking';
 import validateTestBooking from '../services/validateTestBooking';
 import logger from '../util/logger';
 
@@ -29,8 +29,11 @@ export const handler = async (
     body: `Invalid path: ${event.httpMethod} ${event.path}`,
   });
 
+  let booking: unknown;
+
   try {
-    await validateTestBooking(JSON.parse(event.body));
+    booking = JSON.parse(event.body);
+    await validateTestBooking(booking);
     logger.info('validateTestBooking ending');
   } catch (error: unknown) {
     logger.error('Request body failed validation');
@@ -41,7 +44,7 @@ export const handler = async (
     });
   }
 
-  const result = await sendBooking(JSON.parse(event.body) as unknown as IDynamicsBooking[]);
+  const result = await sendBooking(booking as Booking[]);
 
   if (result.FailCount >= 1) {
     return Promise.resolve({

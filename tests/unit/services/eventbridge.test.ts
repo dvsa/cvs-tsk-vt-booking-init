@@ -1,13 +1,13 @@
 import { EventBridge, Request } from 'aws-sdk';
-import { mocked } from 'ts-jest/utils';
+import { mocked } from 'jest-mock';
 import {
   PutEventsResponse,
   PutEventsRequest,
   PutEventsResultEntry,
 } from 'aws-sdk/clients/eventbridge';
 import { sendBooking } from '../../../src/services/eventbridge';
-import { ISendResponse } from '../../../src/interfaces/ISendResponse';
-import { IDynamicsBooking } from '../../../src/interfaces/IDynamicsBooking';
+import { SendResponse } from '../../../src/interfaces/SendResponse';
+import { Booking } from '../../../src/interfaces/Booking';
 
 jest.mock('aws-sdk', () => {
   const mEventBridgeInstance = {
@@ -57,17 +57,17 @@ describe('Send events', () => {
       jest.clearAllMocks();
     });
     it('GIVEN one event to send WHEN sent THEN one event is returned.', async () => {
-      const dynamicsBooking = [<IDynamicsBooking>(<unknown>{ name: 'Success!' })];
-      const mSendResponse: ISendResponse = { SuccessCount: 1, FailCount: 0 };
+      const dynamicsBooking = [<Booking>(<unknown>{ name: 'Success!' })];
+      const mSendResponse: SendResponse = { SuccessCount: 1, FailCount: 0 };
       await expect(sendBooking(dynamicsBooking)).resolves.toEqual(
         mSendResponse,
       );
     });
     it('GIVEN an issue with eventbridge WHEN 1 event fails THEN the failure is in the response.', async () => {
-      const errorDynamicsBooking = [<IDynamicsBooking>(
+      const errorDynamicsBooking = [<Booking>(
         (<unknown>{ name: 'Error', bookingDate: 'Error' })
       )];
-      const mSendResponse: ISendResponse = { SuccessCount: 0, FailCount: 1 };
+      const mSendResponse: SendResponse = { SuccessCount: 0, FailCount: 1 };
       await expect(sendBooking(errorDynamicsBooking)).resolves.toEqual(
         mSendResponse,
       );

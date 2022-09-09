@@ -1,4 +1,4 @@
-export interface IEventEntry {
+export interface EventEntry {
   Source: string;
   EventBusName: string;
   DetailType: string;

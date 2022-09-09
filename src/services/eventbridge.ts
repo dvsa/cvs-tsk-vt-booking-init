@@ -1,16 +1,16 @@
 import { EventBridge } from 'aws-sdk';
-import { IEventEntry } from '../interfaces/IEventEntry';
-import { IEntries } from '../interfaces/IEntries';
-import { IDynamicsBooking } from '../interfaces/IDynamicsBooking';
-import { ISendResponse } from '../interfaces/ISendResponse';
+import { EventEntry } from '../interfaces/EventEntry';
+import { Entries } from '../interfaces/Entries';
+import { Booking } from '../interfaces/Booking';
+import { SendResponse } from '../interfaces/SendResponse';
 import logger from '../util/logger';
 import config from '../config';
 
 const eventbridge = new EventBridge();
 const sendBooking = async (
-  lineItems: IDynamicsBooking[],
-): Promise<ISendResponse> => {
-  const sendResponse: ISendResponse = {
+  lineItems: Booking[],
+): Promise<SendResponse> => {
+  const sendResponse: SendResponse = {
     SuccessCount: 0,
     FailCount: 0,
   };
@@ -23,7 +23,7 @@ const sendBooking = async (
     );
 
     try {
-      const entry: IEventEntry = {
+      const entry: EventEntry = {
         Source: config.aws.eventBusSource,
         Detail: JSON.stringify(lineItem),
         DetailType: 'CVS Test Booking',
@@ -31,7 +31,7 @@ const sendBooking = async (
         Time: new Date(),
       };
 
-      const params: IEntries = {
+      const params: Entries = {
         Entries: [entry],
       };
 

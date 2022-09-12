@@ -1,9 +1,9 @@
 module.exports = {
   verbose: true,
-  transform: { "\\.ts$": ["ts-jest"] },
-  testPathIgnorePatterns: ["/.build/"],
-  transformIgnorePatterns: ["<rootDir>/node_modules/"],
-  coverageDirectory: "<rootDir>/coverage/",
+  transform: { '\\.ts$': ['ts-jest'] },
+  testPathIgnorePatterns: ['/.build/'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+  coverageDirectory: '<rootDir>/coverage/',
   coverageThreshold: {
     global: {
       branches: 80,
@@ -12,5 +12,5 @@ module.exports = {
       statements: 80,
     },
   },
-  testResultsProcessor: "jest-sonar-reporter",
+  testResultsProcessor: 'jest-sonar-reporter',
 };

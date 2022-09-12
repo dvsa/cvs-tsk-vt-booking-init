@@ -19,15 +19,17 @@ export const handler = async (
   event: APIGatewayProxyEvent,
   _context: Context,
 ): Promise<APIGatewayProxyResult> => {
-  if (!event.body) return Promise.resolve({
-    statusCode: 400,
-    body: 'No body in request',
-  });
+  if (!event.body)
+    return Promise.resolve({
+      statusCode: 400,
+      body: 'No body in request',
+    });
 
-  if (event.httpMethod !== 'POST') return Promise.resolve({
-    statusCode: 400,
-    body: `Invalid path: ${event.httpMethod} ${event.path}`,
-  });
+  if (event.httpMethod !== 'POST')
+    return Promise.resolve({
+      statusCode: 400,
+      body: `Invalid path: ${event.httpMethod} ${event.path}`,
+    });
 
   let booking: unknown;
 
@@ -49,13 +51,16 @@ export const handler = async (
   if (result.FailCount >= 1) {
     return Promise.resolve({
       statusCode: 500,
-      body: `Failed to send ${result.FailCount} booking${result.FailCount > 1 ? 's' : ''} to EventBridge, please see logs for details`,
+      body: `Failed to send ${result.FailCount} booking${
+        result.FailCount > 1 ? 's' : ''
+      } to EventBridge, please see logs for details`,
     });
   }
 
   return Promise.resolve({
     statusCode: 201,
-    body: `Successfully sent ${result.SuccessCount} booking${result.SuccessCount > 1 ? 's' : ''} to EventBridge`,
+    body: `Successfully sent ${result.SuccessCount} booking${
+      result.SuccessCount > 1 ? 's' : ''
+    } to EventBridge`,
   });
 };
-

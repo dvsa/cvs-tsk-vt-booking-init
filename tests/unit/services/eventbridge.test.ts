@@ -23,7 +23,7 @@ jest.mock('aws-sdk', () => {
 });
 
 type PutEventsWithParams = (
-  params: PutEventsRequest
+  params: PutEventsRequest,
 ) => AWS.Request<PutEventsResponse, AWS.AWSError>;
 
 const mEventBridgeInstance = new EventBridge();
@@ -31,14 +31,19 @@ const mResultInstance = new Request<PutEventsResponse, AWS.AWSError>(
   null,
   null,
 );
-// eslint-disable-next-line jest/unbound-method
-mocked(mEventBridgeInstance.putEvents as PutEventsWithParams).mockImplementation(
+mocked(
+  // eslint-disable-next-line jest/unbound-method
+  mEventBridgeInstance.putEvents as PutEventsWithParams,
+).mockImplementation(
   (params: PutEventsRequest): AWS.Request<PutEventsResponse, AWS.AWSError> => {
     const mPutEventsResponse: PutEventsResponse = {
       FailedEntryCount: 0,
       Entries: Array<PutEventsResultEntry>(params.Entries.length),
     };
-    if (params.Entries[0].Detail === JSON.stringify({ name: 'Error', bookingDate: 'Error' })) {
+    if (
+      params.Entries[0].Detail ===
+      JSON.stringify({ name: 'Error', bookingDate: 'Error' })
+    ) {
       mResultInstance.promise = jest
         .fn()
         .mockReturnValue(Promise.reject(new Error('Oh no!')));
@@ -64,9 +69,9 @@ describe('Send events', () => {
       );
     });
     it('GIVEN an issue with eventbridge WHEN 1 event fails THEN the failure is in the response.', async () => {
-      const errorDynamicsBooking = [<Booking>(
-        (<unknown>{ name: 'Error', bookingDate: 'Error' })
-      )];
+      const errorDynamicsBooking = [
+        <Booking>(<unknown>{ name: 'Error', bookingDate: 'Error' }),
+      ];
       const mSendResponse: SendResponse = { SuccessCount: 0, FailCount: 1 };
       await expect(sendBooking(errorDynamicsBooking)).resolves.toEqual(
         mSendResponse,

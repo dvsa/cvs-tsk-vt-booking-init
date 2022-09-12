@@ -2,7 +2,14 @@ import { Context } from 'aws-lambda';
 import { handler } from '../../../src/handler/dynamics';
 import { SendResponse } from '../../../src/interfaces/SendResponse';
 import { sendBooking } from '../../../src/services/eventbridge';
-import { mDynamicsRequest, mDynamicsInvalidRequest, mDynamicsInvalidRequest2, mDynamicsFailedRequest, mDynamicsEmptyBodyRequest, mDynamicsUnavailableRequest } from '../../integration/resources/mDynamicsRequests';
+import {
+  mDynamicsRequest,
+  mDynamicsInvalidRequest,
+  mDynamicsInvalidRequest2,
+  mDynamicsFailedRequest,
+  mDynamicsEmptyBodyRequest,
+  mDynamicsUnavailableRequest,
+} from '../../integration/resources/mDynamicsRequests';
 
 jest.mock('../../../src/services/eventbridge', () => ({
   sendBooking: jest
@@ -40,14 +47,14 @@ describe('dynamics handler tests', () => {
     });
   });
 
-  it('receives body that doesn\'t contain array, return 400 bad request', async () => {
+  it("receives body that doesn't contain array, return 400 bad request", async () => {
     const result = await handler(mDynamicsInvalidRequest2, context);
 
     expect(sendBooking).toHaveBeenCalledTimes(0);
 
     expect(result).toEqual({
       statusCode: 400,
-      body: 'Received event failed validation: ValidationError: \"value\" must be an array',
+      body: 'Received event failed validation: ValidationError: "value" must be an array',
     });
   });
 
@@ -62,7 +69,7 @@ describe('dynamics handler tests', () => {
 
     expect(result).toEqual({
       statusCode: 400,
-      body: 'Received event failed validation: ValidationError: \"[0].name\" is required. \"[0].bookingDate\" is required. \"[0].vrm\" is required. \"[0].testCode\" is required. \"[0].testDate\" is required. \"[0].pNumber\" is required',
+      body: 'Received event failed validation: ValidationError: "[0].name" is required. "[0].bookingDate" is required. "[0].vrm" is required. "[0].testCode" is required. "[0].testDate" is required. "[0].pNumber" is required',
     });
   });
 

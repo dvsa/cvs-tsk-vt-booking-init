@@ -46,7 +46,7 @@ export interface TestResult {
   shouldEmailCertificate?: string;
   testHistory?: TestResult[];
 }
-  
+
 export interface TestType {
   prohibitionIssued: boolean;
   testCode?: string; // Not sent from FE, calculated in the BE.
@@ -72,7 +72,7 @@ export interface TestType {
   certificateNumber?: string | null;
   testExpiryDate?: string | Date; // Sent form FE only for LEC tests. For the rest of the test types it is not sent from FE, and calculated in the BE.
   deletionFlag?: boolean | null; // Not sent from FE, calculated in the BE.
-  
+
   // Used only for LEC tests.
   modType?: ModType | null;
   particulateTrapSerialNumber?: string | null;
@@ -82,7 +82,7 @@ export interface TestType {
   particulateTrapFitted?: string | null;
   fuelType?: string | null;
 }
-  
+
 export interface Defect {
   deficiencyCategory: string;
   deficiencyText: string | null;
@@ -98,12 +98,12 @@ export interface Defect {
   imNumber: number;
   prohibitionIssued?: boolean;
 }
-  
+
 export interface AdditionalInformation {
   location: Location | null;
   notes: string;
 }
-  
+
 export interface Location {
   axleNumber: number | null;
   horizontal: string | null;
@@ -113,14 +113,13 @@ export interface Location {
   lateral: string | null;
   seatNumber: number | null;
 }
-  
+
 export interface VehicleClass {
   code: string;
   description: string;
 }
-  
+
 export interface ModType {
   code: string;
   description: string;
 }
-  

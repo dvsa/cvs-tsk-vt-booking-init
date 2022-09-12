@@ -1,7 +1,15 @@
 import { Context } from 'aws-lambda';
 import { handler } from '../../src/handler/dynamics';
-import { mDynamicsEvent, mDynamicsFailedEvent } from './resources/mDynamicsEvents';
-import { mDynamicsRequest, mDynamicsInvalidRequest, mDynamicsFailedRequest, mDynamicsMultipleRequest } from './resources/mDynamicsRequests';
+import {
+  mDynamicsEvent,
+  mDynamicsFailedEvent,
+} from './resources/mDynamicsEvents';
+import {
+  mDynamicsRequest,
+  mDynamicsInvalidRequest,
+  mDynamicsFailedRequest,
+  mDynamicsMultipleRequest,
+} from './resources/mDynamicsRequests';
 import { PutEventsRequest } from 'aws-sdk/clients/eventbridge';
 import validateTestBooking from '../../src/services/validateTestBooking';
 import { mocked } from 'jest-mock';
@@ -9,7 +17,7 @@ import { mocked } from 'jest-mock';
 const context: Context = <Context>{};
 
 const putEventsFn = jest.fn();
-    
+
 jest.mock('aws-sdk', () => ({
   EventBridge: jest.fn().mockImplementation(() => ({
     putEvents: jest.fn().mockImplementation((params: unknown) => {
@@ -74,7 +82,9 @@ describe('Handler integration test', () => {
   });
 
   it('GIVEN all external resources are mocked WHEN called with invalid request THEN return 400 bad request error and not push event to EventBridge', async () => {
-    mValidateTestBooking.mockImplementationOnce(() => {throw Error();});
+    mValidateTestBooking.mockImplementationOnce(() => {
+      throw Error();
+    });
 
     const result = await handler(mDynamicsInvalidRequest, context);
 

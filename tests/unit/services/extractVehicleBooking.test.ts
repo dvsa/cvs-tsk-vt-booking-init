@@ -16,16 +16,16 @@ describe('extractVehicleBooking', () => {
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
-      name:'Rowe, Wuns',
-      bookingDate:'2021-01-14',
+      name: 'Rowe, Wuns',
+      bookingDate: '2021-01-14',
       vrm: 'JY58FPP',
       testDate: '2021-01-14',
       testCode: 'FFV',
       pNumber: '87-1369569',
     });
     expect(result[1]).toEqual({
-      name:'Rowe, Wuns',
-      bookingDate:'2021-01-14',
+      name: 'Rowe, Wuns',
+      bookingDate: '2021-01-14',
       vrm: 'JY58FPP',
       testDate: '2021-01-14',
       testCode: 'LEC',
@@ -40,16 +40,16 @@ describe('extractVehicleBooking', () => {
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
-      name:'MyATF',
-      bookingDate:'2021-01-14',
+      name: 'MyATF',
+      bookingDate: '2021-01-14',
       vrm: 'C000001',
       testDate: '2021-01-14',
       testCode: 'ART',
       pNumber: '87-1369569',
     });
     expect(result[1]).toEqual({
-      name:'MyATF',
-      bookingDate:'2021-01-14',
+      name: 'MyATF',
+      bookingDate: '2021-01-14',
       vrm: 'C000001',
       testDate: '2021-01-14',
       testCode: 'AAT',
@@ -64,7 +64,6 @@ describe('extractVehicleBooking', () => {
 
     expect(result).toEqual([]);
     expect(logger.info).toHaveBeenLastCalledWith('MODIFY event - ignoring');
-
   });
 
   it('should ignore dynamo remove stream events', () => {
@@ -74,7 +73,6 @@ describe('extractVehicleBooking', () => {
 
     expect(result).toEqual([]);
     expect(logger.info).toHaveBeenLastCalledWith('REMOVE event - ignoring');
-
   });
 
   it('should ignore test results that are legacy', () => {
@@ -83,7 +81,9 @@ describe('extractVehicleBooking', () => {
     const result = extractVehicleBookings(event);
 
     expect(result).toEqual([]);
-    expect(logger.info).toHaveBeenLastCalledWith('legacy test result with ID LEGACYa1b16bae-ae57-4605-96a5-989e0f71f5e3 - ignoring');
+    expect(logger.info).toHaveBeenLastCalledWith(
+      'legacy test result with ID LEGACYa1b16bae-ae57-4605-96a5-989e0f71f5e3 - ignoring',
+    );
   });
 
   it('should throw error if no vrm or trailerId is present', () => {
@@ -94,8 +94,15 @@ describe('extractVehicleBooking', () => {
     };
 
     expect(fn).toThrow();
-    expect(logger.error).toHaveBeenNthCalledWith(1, 'Unable to process test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3');
-    expect(logger.error).toHaveBeenNthCalledWith(2, '', new Error('psv does not have associated vrm'));
+    expect(logger.error).toHaveBeenNthCalledWith(
+      1,
+      'Unable to process test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3',
+    );
+    expect(logger.error).toHaveBeenNthCalledWith(
+      2,
+      '',
+      new Error('psv does not have associated vrm'),
+    );
   });
 
   it('should throw error if 4th char of test code is not numeric - should be the number of axles i.e. a number', () => {
@@ -106,8 +113,15 @@ describe('extractVehicleBooking', () => {
     };
 
     expect(fn).toThrow();
-    expect(logger.error).toHaveBeenNthCalledWith(1, 'Unable to process test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3');
-    expect(logger.error).toHaveBeenNthCalledWith(2, '', new Error('4th char of test code is non-numeric: ffva'));
+    expect(logger.error).toHaveBeenNthCalledWith(
+      1,
+      'Unable to process test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3',
+    );
+    expect(logger.error).toHaveBeenNthCalledWith(
+      2,
+      '',
+      new Error('4th char of test code is non-numeric: ffva'),
+    );
   });
 
   it('should ignore test results that have a status of cancelled', () => {
@@ -116,6 +130,8 @@ describe('extractVehicleBooking', () => {
     const result = extractVehicleBookings(event);
 
     expect(result).toEqual([]);
-    expect(logger.info).toHaveBeenLastCalledWith('test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3 has a status of cancelled and will not be resulted');
+    expect(logger.info).toHaveBeenLastCalledWith(
+      'test result with ID: a1b16bae-ae57-4605-96a5-989e0f71f5e3 has a status of cancelled and will not be resulted',
+    );
   });
 });

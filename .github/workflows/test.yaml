@@ -10,8 +10,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "14"
-          cache: "npm"
+          node-version: '14'
+          cache: 'npm'
       - name: update npm dependency
         run: npm i -g npm@7
       - name: Install dependencies

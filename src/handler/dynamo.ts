@@ -25,7 +25,16 @@ export const handler = async (
 
   const result = await sendBooking(bookings);
 
-  logger.info(`Successfully sent ${result.SuccessCount} booking${result.SuccessCount !== 1 ? 's' : ''} to EventBridge`);
+  logger.info(
+    `Successfully sent ${result.SuccessCount} booking${
+      result.SuccessCount !== 1 ? 's' : ''
+    } to EventBridge`,
+  );
 
-  if (result.FailCount >= 1) logger.error(`Failed to send ${result.FailCount} booking${result.FailCount !== 1 ? 's' : ''} to EventBridge, please see logs for details`);
+  if (result.FailCount >= 1)
+    logger.error(
+      `Failed to send ${result.FailCount} booking${
+        result.FailCount !== 1 ? 's' : ''
+      } to EventBridge, please see logs for details`,
+    );
 };

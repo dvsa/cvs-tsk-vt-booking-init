@@ -1,5 +1,6 @@
 {
-    "Records": [{
+  "Records": [
+    {
       "eventName": "INSERT",
       "dynamodb": {
         "NewImage": {
@@ -13,13 +14,13 @@
             "S": "psv"
           },
           "testStationName": {
-            "S":"Rowe, Wunsch and Wisoky"
+            "S": "Rowe, Wunsch and Wisoky"
           },
-          "testStationPNumber":{
+          "testStationPNumber": {
             "S": "87-1369569"
           },
           "testStartTimestamp": {
-            "S":"2021-01-14T10:36:33.987Z"
+            "S": "2021-01-14T10:36:33.987Z"
           },
           "testTypes": {
             "L": [
@@ -41,5 +42,6 @@
           }
         }
       }
-    }]
-  }
+    }
+  ]
+}

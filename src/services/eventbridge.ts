@@ -7,14 +7,12 @@ import logger from '../util/logger';
 import config from '../config';
 
 const eventbridge = new EventBridge();
-const sendBooking = async (
-  lineItems: Booking[],
-): Promise<SendResponse> => {
+const sendBooking = async (lineItems: Booking[]): Promise<SendResponse> => {
   const sendResponse: SendResponse = {
     SuccessCount: 0,
     FailCount: 0,
   };
-  
+
   logger.info('sendBooking starting');
 
   for (const lineItem of lineItems) {
@@ -41,7 +39,9 @@ const sendBooking = async (
       await eventbridge.putEvents(params).promise();
       sendResponse.SuccessCount++;
     } catch (error) {
-      logger.error('line item being processed failed to be put onto eventbridge');
+      logger.error(
+        'line item being processed failed to be put onto eventbridge',
+      );
       logger.error('', error);
       sendResponse.FailCount++;
     }

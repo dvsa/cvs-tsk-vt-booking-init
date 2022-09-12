@@ -3,10 +3,11 @@
 ## Overview
 
 This repository contains the source code for two lambdas:
+
 - `vt-booking-dynamics-init`
 - `vt-booking-dynamo-init`
 
-Both lambdas are part of initialising the ATOS booking integration process - receiving test booking events from both Dynamics CE (via API gateway) and VTA (via test-results DynamoDB stream events) and extracting the required information from said events to be then processed by the `vt-booking` lambda. 
+Both lambdas are part of initialising the ATOS booking integration process - receiving test booking events from both Dynamics CE (via API gateway) and VTA (via test-results DynamoDB stream events) and extracting the required information from said events to be then processed by the `vt-booking` lambda.
 
 Both lambdas push a stringified JSON event onto an EventBridge with the format (pre-escaped):
 
@@ -37,16 +38,17 @@ An overview of the architecture for the ATOS booking integration can be found be
 **Manually testing lambdas**
 
 vt-booking-dynamics-init
+
 - Build: `npm run build`
 - Start: `npm run start`
 - To invoke the lambda with a test event: `npm run invoke`
-- To invoke the lambda with HTTP request: 
+- To invoke the lambda with HTTP request:
   - Request: `POST http://localhost:8000/dev/vt-booking`
   - Body: `[{"name":"hello", "bookingDate":"2022-01-01", "vrm":"12345", "testCode":"123", "testDate":"2022-01-01", "pNumber":"1234"}]`
 
 vt-booking-dynamo-init
-- T.B.C
 
+- T.B.C
 
 ## Testing
 
@@ -55,17 +57,16 @@ vt-booking-dynamo-init
 - Coverage results will be displayed on terminal and stored in the `coverage` directory
   - The coverage requirements can be set in `jest.config.js`
 
-
 ## Logging
 
 Logging is handled by `https://github.com/winstonjs/winston`. A pre-configured logger is available, and can be used like so:
 
 ```ts
-import logger from "../utils/logger";
+import logger from '../utils/logger';
 
-logger.info("Hello world");
-logger.error("Hello world");
-logger.warn("Hello world");
+logger.info('Hello world');
+logger.error('Hello world');
+logger.warn('Hello world');
 ```
 
 ## Contributing

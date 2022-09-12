@@ -10,10 +10,7 @@ import { sendBooking } from '../services/eventbridge';
  * @param {Context} _context
  * @returns {Promise<VoidFunction>}
  */
-export const handler = async (
-  event: DynamoDBStreamEvent,
-  _context: Context,
-): Promise<void> => {
+export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
   logger.debug(`Received event: ${JSON.stringify(event)}`);
 
   const bookings = extractVehicleBookings(event);
@@ -31,10 +28,11 @@ export const handler = async (
     } to EventBridge`,
   );
 
-  if (result.FailCount >= 1)
+  if (result.FailCount >= 1) {
     logger.error(
       `Failed to send ${result.FailCount} booking${
         result.FailCount !== 1 ? 's' : ''
       } to EventBridge, please see logs for details`,
     );
+  }
 };

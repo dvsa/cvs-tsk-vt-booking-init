@@ -17,19 +17,20 @@ import logger from '../util/logger';
  */
 export const handler = async (
   event: APIGatewayProxyEvent,
-  _context: Context,
 ): Promise<APIGatewayProxyResult> => {
-  if (!event.body)
+  if (!event.body) {
     return Promise.resolve({
       statusCode: 400,
       body: 'No body in request',
     });
+  }
 
-  if (event.httpMethod !== 'POST')
+  if (event.httpMethod !== 'POST') {
     return Promise.resolve({
       statusCode: 400,
       body: `Invalid path: ${event.httpMethod} ${event.path}`,
     });
+  }
 
   let booking: unknown;
 

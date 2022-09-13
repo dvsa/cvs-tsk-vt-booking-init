@@ -27,7 +27,7 @@ describe('dynamo handler tests', () => {
     expect(res).toHaveProperty('statusCode', 201);
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).toHaveBeenCalled();
-    expect(logger.info).toHaveBeenLastCalledWith('Successfully sent 1 booking to EventBridge');
+    expect(logger.info).toHaveBeenLastCalledWith('Successfully sent 1 bookings to EventBridge');
   });
 
   it('receives event with no booking details, so doesn\'t put on EventBridge', async () => {
@@ -50,6 +50,6 @@ describe('dynamo handler tests', () => {
     expect(res).toHaveProperty('statusCode', 500);
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).toHaveBeenCalled();
-    expect(logger.error).toHaveBeenNthCalledWith(1, 'Failed to send 1 booking to EventBridge, please see logs for details');    
+    expect(logger.error).toHaveBeenNthCalledWith(1, 'Failed to send 1 bookings to EventBridge, please see logs for details');    
   });
 });

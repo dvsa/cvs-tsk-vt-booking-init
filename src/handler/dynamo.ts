@@ -29,16 +29,16 @@ export const handler = async (
   const result = await sendBooking(bookings);
 
   if (result.FailCount >= 1) {
-    logger.error(`Failed to send ${result.FailCount} booking${result.FailCount !== 1 ? 's' : ''} to EventBridge, please see logs for details`);
+    logger.error(`Failed to send ${result.FailCount} bookings to EventBridge, please see logs for details`);
     return Promise.resolve({
       statusCode: 500,
-      body: `Failed to send ${result.FailCount} booking${result.FailCount > 1 ? 's' : ''} to EventBridge, please see logs for details`,
+      body: `Failed to send ${result.FailCount} bookings to EventBridge, please see logs for details`,
     });
   }
 
-  logger.info(`Successfully sent ${result.SuccessCount} booking${result.SuccessCount !== 1 ? 's' : ''} to EventBridge`);
+  logger.info(`Successfully sent ${result.SuccessCount} bookings to EventBridge`);
   return Promise.resolve({
     statusCode: 201,
-    body: `Successfully sent ${result.SuccessCount} booking${result.SuccessCount > 1 ? 's' : ''} to EventBridge`,
+    body: `Successfully sent ${result.SuccessCount} bookings to EventBridge`,
   });
 };

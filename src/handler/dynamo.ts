@@ -1,4 +1,4 @@
-import type { DynamoDBStreamEvent, Context } from 'aws-lambda';
+import type { DynamoDBStreamEvent } from 'aws-lambda';
 import logger from '../util/logger';
 import { extractVehicleBookings } from '../services/extractVehicleBooking';
 import { sendBooking } from '../services/eventbridge';

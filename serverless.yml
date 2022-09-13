@@ -10,12 +10,6 @@ provider:
   runtime: nodejs14.x
 
 functions:
-  dynamicsBooking:
-    handler: src/handler/dynamics.handler
-    events:
-      - http:
-          path: vt-booking
-          method: post
   dynamoBooking:
     handler: src/handler/dynamo.handler
     events:

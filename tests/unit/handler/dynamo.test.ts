@@ -22,9 +22,8 @@ describe('dynamo handler tests', () => {
     mocked(sendBooking).mockResolvedValueOnce(<SendResponse>{ SuccessCount: 1 });
     mocked(extractVehicleBookings).mockReturnValueOnce(<Booking[]>[<Booking>{}]);
 
-    const res = await handler(<DynamoDBStreamEvent>{}, context);
+    await handler(<DynamoDBStreamEvent>{}, context);
 
-    expect(res).toHaveProperty('statusCode', 201);
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).toHaveBeenCalled();
     expect(logger.info).toHaveBeenLastCalledWith('Successfully sent 1 bookings to EventBridge');
@@ -33,9 +32,8 @@ describe('dynamo handler tests', () => {
   it('receives event with no booking details, so doesn\'t put on EventBridge', async () => {
     mocked(extractVehicleBookings).mockReturnValueOnce(<Booking[]>[]);
 
-    const res = await handler(<DynamoDBStreamEvent>{}, context);
+    await handler(<DynamoDBStreamEvent>{}, context);
 
-    expect(res).toHaveProperty('statusCode', 400);
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).not.toHaveBeenCalled();
     expect(logger.info).toHaveBeenLastCalledWith('No valid bookings to be sent to EventBridge');
@@ -45,9 +43,8 @@ describe('dynamo handler tests', () => {
     mocked(sendBooking).mockResolvedValueOnce(<SendResponse>{ FailCount: 1, SuccessCount: 0 });
     mocked(extractVehicleBookings).mockReturnValueOnce(<Booking[]>[<Booking>{}]);
 
-    const res = await handler(<DynamoDBStreamEvent>{}, context);
+    await handler(<DynamoDBStreamEvent>{}, context);
 
-    expect(res).toHaveProperty('statusCode', 500);
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).toHaveBeenCalled();
     expect(logger.error).toHaveBeenNthCalledWith(1, 'Failed to send 1 bookings to EventBridge, please see logs for details');    

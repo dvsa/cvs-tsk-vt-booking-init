@@ -8,37 +8,28 @@ import { sendBooking } from '../services/eventbridge';
  *
  * @param {DynamoDBStreamEvent} event
  * @param {Context} _context
- * @returns {Promise<APIGatewayProxyResult>}
+ * @returns {Promise<void>}
  */
 export const handler = async (
   event: DynamoDBStreamEvent,
   _context: Context,
-): Promise<APIGatewayProxyResult> => {
+): Promise<void> => {
   logger.debug(`Received event: ${JSON.stringify(event)}`);
 
   const bookings = extractVehicleBookings(event);
 
   if (bookings.length === 0) {
     logger.info('No valid bookings to be sent to EventBridge');
-    return Promise.resolve({
-      statusCode: 400,
-      body: 'No body in request',
-    });  
+    return;  
   }
 
   const result = await sendBooking(bookings);
 
   if (result.FailCount >= 1) {
     logger.error(`Failed to send ${result.FailCount} bookings to EventBridge, please see logs for details`);
-    return Promise.resolve({
-      statusCode: 500,
-      body: `Failed to send ${result.FailCount} bookings to EventBridge, please see logs for details`,
-    });
+    return;
   }
 
   logger.info(`Successfully sent ${result.SuccessCount} bookings to EventBridge`);
-  return Promise.resolve({
-    statusCode: 201,
-    body: `Successfully sent ${result.SuccessCount} bookings to EventBridge`,
-  });
+  return;
 };

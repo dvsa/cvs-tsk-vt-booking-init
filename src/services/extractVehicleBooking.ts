@@ -10,8 +10,9 @@ const trimTestCode = (testCode: string | undefined): string => {
     throw new Error('testCode not defined in test result');
 
   if (testCode.length === 4) {
-    if (+testCode[3] !== +testCode[3])
+    if (+testCode[3] !== +testCode[3]) {
       throw new Error(`4th char of test code is non-numeric: ${testCode}`);
+    }
 
     return testCode.slice(0, 3).toUpperCase();
   }
@@ -20,7 +21,9 @@ const trimTestCode = (testCode: string | undefined): string => {
 };
 
 const trimTestStationName = (testStationName: string): string => {
-  if (testStationName.length > 10) return testStationName.slice(0, 10);
+  if (testStationName.length > 10) {
+    return testStationName.slice(0, 10);
+  }
 
   return testStationName;
 };
@@ -36,7 +39,9 @@ export const extractVehicleBookings = (
       continue;
     }
 
-    if (!dbRecord.dynamodb?.NewImage) continue;
+    if (!dbRecord.dynamodb?.NewImage) {
+      continue;
+    }
 
     const newImage = DynamoDB.Converter.unmarshall(
       dbRecord.dynamodb.NewImage,
@@ -69,7 +74,7 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
     );
     return testResult.testTypes.map((testType) => {
       if (testResult.vehicleType === 'trl') {
-        if (testResult.trailerId)
+        if (testResult.trailerId) {
           return {
             name: trimTestStationName(testResult.testStationName),
             bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
@@ -78,10 +83,12 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
             testDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
             pNumber: testResult.testStationPNumber,
           };
+        }
+
         throw new Error('trailer does not have trailerId available');
       }
 
-      if (testResult.vrm)
+      if (testResult.vrm) {
         return {
           name: trimTestStationName(testResult.testStationName),
           bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
@@ -90,6 +97,7 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
           testDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
           pNumber: testResult.testStationPNumber,
         };
+      }
 
       throw new Error(`${testResult.vehicleType} does not have associated vrm`);
     });

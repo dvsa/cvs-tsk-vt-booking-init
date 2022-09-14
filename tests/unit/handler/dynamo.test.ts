@@ -1,13 +1,11 @@
 import { mocked } from 'jest-mock';
 import { handler } from '../../../src/handler/dynamo';
-import { Context, DynamoDBStreamEvent } from 'aws-lambda';
+import { DynamoDBStreamEvent } from 'aws-lambda';
 import { sendBooking } from '../../../src/services/eventbridge';
 import { SendResponse } from '../../../src/interfaces/SendResponse';
 import { extractVehicleBookings } from '../../../src/services/extractVehicleBooking';
 import { Booking } from '../../../src/interfaces/Booking';
 import logger from '../../../src/util/logger';
-
-let context: Context;
 
 jest.mock('../../../src/services/eventbridge');
 jest.mock('../../../src/services/extractVehicleBooking');
@@ -26,7 +24,7 @@ describe('dynamo handler tests', () => {
       <Booking>{},
     ]);
 
-    await handler(<DynamoDBStreamEvent>{}, context);
+    await handler(<DynamoDBStreamEvent>{});
 
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).toHaveBeenCalled();
@@ -38,7 +36,7 @@ describe('dynamo handler tests', () => {
   it("receives event with no booking details, so doesn't put on EventBridge", async () => {
     mocked(extractVehicleBookings).mockReturnValueOnce(<Booking[]>[]);
 
-    await handler(<DynamoDBStreamEvent>{}, context);
+    await handler(<DynamoDBStreamEvent>{});
 
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).not.toHaveBeenCalled();
@@ -56,7 +54,7 @@ describe('dynamo handler tests', () => {
       <Booking>{},
     ]);
 
-    await handler(<DynamoDBStreamEvent>{}, context);
+    await handler(<DynamoDBStreamEvent>{});
 
     expect(extractVehicleBookings).toHaveBeenCalled();
     expect(sendBooking).toHaveBeenCalled();

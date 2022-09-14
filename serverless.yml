@@ -15,3 +15,5 @@ functions:
     events:
       - stream:
           type: dynamodb
+          arn:
+            Ref: testResultsStream

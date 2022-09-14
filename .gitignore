@@ -111,3 +111,6 @@ dist
 .vscode
 .github
 .reports
+
+# Sonar scanner artifacts
+.scannerwork

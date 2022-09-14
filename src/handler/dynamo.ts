@@ -1,4 +1,4 @@
-import type { DynamoDBStreamEvent, Context } from 'aws-lambda';
+import type { DynamoDBStreamEvent } from 'aws-lambda';
 import logger from '../util/logger';
 import { extractVehicleBookings } from '../services/extractVehicleBooking';
 import { sendBooking } from '../services/eventbridge';
@@ -7,13 +7,9 @@ import { sendBooking } from '../services/eventbridge';
  * Handler for vehicle bookings received from test-result DynamoDB
  *
  * @param {DynamoDBStreamEvent} event
- * @param {Context} _context
  * @returns {Promise<VoidFunction>}
  */
-export const handler = async (
-  event: DynamoDBStreamEvent,
-  _context: Context,
-): Promise<void> => {
+export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
   logger.debug(`Received event: ${JSON.stringify(event)}`);
 
   const bookings = extractVehicleBookings(event);
@@ -31,10 +27,11 @@ export const handler = async (
     } to EventBridge`,
   );
 
-  if (result.FailCount >= 1)
+  if (result.FailCount >= 1) {
     logger.error(
       `Failed to send ${result.FailCount} booking${
         result.FailCount !== 1 ? 's' : ''
       } to EventBridge, please see logs for details`,
     );
+  }
 };

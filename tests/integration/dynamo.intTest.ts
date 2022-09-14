@@ -1,4 +1,3 @@
-import { Context } from 'aws-lambda';
 import { PutEventsRequest } from 'aws-sdk/clients/eventbridge';
 import config from '../../src/config';
 import { handler } from '../../src/handler/dynamo';
@@ -6,8 +5,6 @@ import { Entries } from '../../src/interfaces/Entries';
 import { EventEntry } from '../../src/interfaces/EventEntry';
 import logger from '../../src/util/logger';
 import { GetDynamoStream } from '../unit/resources/mTestResultRecords';
-
-const context: Context = <Context>{};
 
 const putEventsFn = jest.fn();
 
@@ -48,7 +45,7 @@ describe('Handler integration test', () => {
   it('receives valid dynamo stream event and puts transformed event on EventBridge', async () => {
     const event = GetDynamoStream(1);
 
-    await handler(event, context);
+    await handler(event);
 
     expect(putEventsFn).toHaveBeenCalledTimes(2);
     expect(putEventsFn).toHaveBeenNthCalledWith(1, <Entries>{
@@ -85,7 +82,7 @@ describe('Handler integration test', () => {
   it('receives valid dynamo stream event but fails to put event onto EventBridge', async () => {
     const event = GetDynamoStream(7);
 
-    await handler(event, context);
+    await handler(event);
 
     expect(putEventsFn).toHaveBeenCalledTimes(2);
 

@@ -7,7 +7,6 @@ import { sendBooking } from '../services/eventbridge';
  * Handler for vehicle bookings received from test-result DynamoDB
  *
  * @param {DynamoDBStreamEvent} event
- * @param {Context} _context
  * @returns {Promise<VoidFunction>}
  */
 export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {

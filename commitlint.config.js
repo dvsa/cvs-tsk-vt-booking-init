@@ -34,18 +34,10 @@ module.exports = {
         const ticketNumberFormat = /^[a-z0-9]+-\d+$/;
         // type(scope?): subject
         // we want to ticket number to appear in the commit msg as well as scope when we release
-        if (
-          parsed &&
-          ((parsed.scope && parsed.scope.match(ticketNumberFormat) !== null) ||
-            parsed.scope === 'release')
-        ) {
-          return [true];
-        } else {
-          return [
-            false,
-            `scope must follow the format defined in the commitlint config. The current format is ${ticketNumberFormat}`,
-          ];
-        }
+        return parsed?.scope?.match(ticketNumberFormat) ||
+          parsed?.scope === 'release'
+          ? [true]
+          : [false, `scope must follow the ${ticketNumberFormat} format`];
       },
     ],
   },

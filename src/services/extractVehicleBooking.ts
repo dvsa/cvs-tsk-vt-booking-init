@@ -20,14 +20,6 @@ const trimTestCode = (testCode: string | undefined): string => {
   return testCode.toUpperCase();
 };
 
-const trimTestStationName = (testStationName: string): string => {
-  if (testStationName.length > 10) {
-    return testStationName.slice(0, 10);
-  }
-
-  return testStationName;
-};
-
 export const extractVehicleBookings = (
   event: DynamoDBStreamEvent,
 ): Booking[] => {
@@ -76,7 +68,7 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
       if (testResult.vehicleType === 'trl') {
         if (testResult.trailerId) {
           return {
-            name: trimTestStationName(testResult.testStationName),
+            name: testResult.testStationName,
             bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
             vrm: testResult.trailerId,
             testCode: trimTestCode(testType.testCode),
@@ -90,7 +82,7 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
 
       if (testResult.vrm) {
         return {
-          name: trimTestStationName(testResult.testStationName),
+          name: testResult.testStationName,
           bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
           vrm: testResult.vrm,
           testCode: trimTestCode(testType.testCode),

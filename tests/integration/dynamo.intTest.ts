@@ -53,7 +53,7 @@ describe('Handler integration test', () => {
         <EventEntry>{
           Source: config.aws.eventBusSource,
           Detail:
-            '{"name":"Rowe, Wuns","bookingDate":"2021-01-14","vrm":"JY58FPP","testCode":"FFV","testDate":"2021-01-14","pNumber":"87-1369569"}',
+            '{"name":"Rowe, Wunsch and Wisoky","bookingDate":"2021-01-14","vrm":"JY58FPP","testCode":"FFV","testDate":"2021-01-14","pNumber":"87-1369569"}',
           DetailType: 'CVS Test Booking',
           EventBusName: config.aws.eventBusName,
           Time: new Date('2022-01-01'),
@@ -66,7 +66,7 @@ describe('Handler integration test', () => {
         <EventEntry>{
           Source: config.aws.eventBusSource,
           Detail:
-            '{"name":"Rowe, Wuns","bookingDate":"2021-01-14","vrm":"JY58FPP","testCode":"LEC","testDate":"2021-01-14","pNumber":"87-1369569"}',
+            '{"name":"Rowe, Wunsch and Wisoky","bookingDate":"2021-01-14","vrm":"JY58FPP","testCode":"LEC","testDate":"2021-01-14","pNumber":"87-1369569"}',
           DetailType: 'CVS Test Booking',
           EventBusName: config.aws.eventBusName,
           Time: new Date('2022-01-01'),

@@ -16,7 +16,7 @@ describe('extractVehicleBooking', () => {
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
-      name: 'Rowe, Wuns',
+      name: 'Rowe, Wunsch and Wisoky',
       bookingDate: '2021-01-14',
       vrm: 'JY58FPP',
       testDate: '2021-01-14',
@@ -24,7 +24,7 @@ describe('extractVehicleBooking', () => {
       pNumber: '87-1369569',
     });
     expect(result[1]).toEqual({
-      name: 'Rowe, Wuns',
+      name: 'Rowe, Wunsch and Wisoky',
       bookingDate: '2021-01-14',
       vrm: 'JY58FPP',
       testDate: '2021-01-14',

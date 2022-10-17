@@ -156,8 +156,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'art',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-15T10:36:33.987Z'
-                        }
+                          S: '2021-01-15T10:36:33.987Z',
+                        },
                       },
                     },
                     {
@@ -166,8 +166,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'aat1',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-14T10:36:33.987Z'
-                        }
+                          S: '2021-01-14T10:36:33.987Z',
+                        },
                       },
                     },
                   ],
@@ -207,8 +207,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'art',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-15T10:36:33.987Z'
-                        }
+                          S: '2021-01-15T10:36:33.987Z',
+                        },
                       },
                     },
                     {
@@ -217,8 +217,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'aat1',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-14T10:36:33.987Z'
-                        }
+                          S: '2021-01-14T10:36:33.987Z',
+                        },
                       },
                     },
                   ],
@@ -258,8 +258,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'ffv2',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-14T10:36:33.987Z'
-                        }
+                          S: '2021-01-14T10:36:33.987Z',
+                        },
                       },
                     },
                     {
@@ -268,8 +268,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'lec',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-15T10:36:33.987Z'
-                        }
+                          S: '2021-01-15T10:36:33.987Z',
+                        },
                       },
                     },
                   ],
@@ -309,8 +309,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'ffva',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-14T10:36:33.987Z'
-                        }
+                          S: '2021-01-14T10:36:33.987Z',
+                        },
                       },
                     },
                   ],
@@ -356,8 +356,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'ffv2',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-14T10:36:33.987Z'
-                        }
+                          S: '2021-01-14T10:36:33.987Z',
+                        },
                       },
                     },
                     {
@@ -366,8 +366,8 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                           S: 'lec',
                         },
                         testTypeStartTimestamp: {
-                          S: '2021-01-14T10:36:33.987Z'
-                        }
+                          S: '2021-01-14T10:36:33.987Z',
+                        },
                       },
                     },
                   ],

@@ -69,10 +69,16 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
         if (testResult.trailerId) {
           return {
             name: testResult.testStationName,
-            bookingDate: dateFormat(testResult.testStartTimestamp, 'yyyy-mm-dd HH:MM:ss'),
+            bookingDate: dateFormat(
+              testResult.testStartTimestamp,
+              'yyyy-mm-dd HH:MM:ss',
+            ),
             trailerId: testResult.trailerId,
             testCode: trimTestCode(testType.testCode),
-            testDate: dateFormat(testType.testTypeStartTimestamp,'yyyy-mm-dd HH:MM:ss'),
+            testDate: dateFormat(
+              testType.testTypeStartTimestamp,
+              'yyyy-mm-dd HH:MM:ss',
+            ),
             pNumber: testResult.testStationPNumber,
           };
         }
@@ -89,7 +95,10 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
           ),
           vrm: testResult.vrm,
           testCode: trimTestCode(testType.testCode),
-          testDate: dateFormat(testType.testTypeStartTimestamp,'yyyy-mm-dd HH:MM:ss'),
+          testDate: dateFormat(
+            testType.testTypeStartTimestamp,
+            'yyyy-mm-dd HH:MM:ss',
+          ),
           pNumber: testResult.testStationPNumber,
         };
       }

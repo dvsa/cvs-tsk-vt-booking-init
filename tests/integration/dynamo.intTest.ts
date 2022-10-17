@@ -32,7 +32,7 @@ jest.mock('aws-sdk', () => ({
 
 jest.mock('../../src/util/logger');
 
-const mockDate = new Date('2021-01-14');
+const mockDate = new Date('2021-01-14T10:36:33.987Z');
 jest
   .spyOn(global, 'Date')
   .mockImplementation(() => mockDate as unknown as string);
@@ -53,7 +53,7 @@ describe('Handler integration test', () => {
         <EventEntry>{
           Source: config.aws.eventBusSource,
           Detail:
-            '{"name":"Rowe, Wunsch and Wisoky","bookingDate":"2021-01-14 12:00:00","vrm":"JY58FPP","testCode":"FFV","testDate":"2021-01-14","pNumber":"87-1369569"}',
+            '{"name":"Rowe, Wunsch and Wisoky","bookingDate":"2021-01-14 10:36:33","vrm":"JY58FPP","testCode":"FFV","testDate":"2021-01-14 10:36:33","pNumber":"87-1369569"}',
           DetailType: 'CVS Test Booking',
           EventBusName: config.aws.eventBusName,
           Time: new Date('2022-01-01'),
@@ -66,7 +66,7 @@ describe('Handler integration test', () => {
         <EventEntry>{
           Source: config.aws.eventBusSource,
           Detail:
-            '{"name":"Rowe, Wunsch and Wisoky","bookingDate":"2021-01-14","vrm":"JY58FPP","testCode":"LEC","testDate":"2021-01-14","pNumber":"87-1369569"}',
+            '{"name":"Rowe, Wunsch and Wisoky","bookingDate":"2021-01-14 10:36:33","vrm":"JY58FPP","testCode":"LEC","testDate":"2021-01-14 10:36:33","pNumber":"87-1369569"}',
           DetailType: 'CVS Test Booking',
           EventBusName: config.aws.eventBusName,
           Time: new Date('2022-01-01'),

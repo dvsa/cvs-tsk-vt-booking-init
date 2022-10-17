@@ -70,7 +70,7 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
           return {
             name: testResult.testStationName,
             bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
-            vrm: testResult.trailerId,
+            trailerId: testResult.trailerId,
             testCode: trimTestCode(testType.testCode),
             testDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
             pNumber: testResult.testStationPNumber,

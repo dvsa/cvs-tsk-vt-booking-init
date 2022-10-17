@@ -42,7 +42,7 @@ describe('extractVehicleBooking', () => {
     expect(result[0]).toEqual({
       name: 'MyATF',
       bookingDate: '2021-01-14',
-      vrm: 'C000001',
+      trailerId: 'C000001',
       testDate: '2021-01-14',
       testCode: 'ART',
       pNumber: '87-1369569',
@@ -50,7 +50,7 @@ describe('extractVehicleBooking', () => {
     expect(result[1]).toEqual({
       name: 'MyATF',
       bookingDate: '2021-01-14',
-      vrm: 'C000001',
+      trailerId: 'C000001',
       testDate: '2021-01-14',
       testCode: 'AAT',
       pNumber: '87-1369569',

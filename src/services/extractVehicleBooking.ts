@@ -69,10 +69,10 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
         if (testResult.trailerId) {
           return {
             name: testResult.testStationName,
-            bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
+            bookingDate: dateFormat(testResult.testStartTimestamp, 'yyyy-mm-dd HH:MM:ss'),
             trailerId: testResult.trailerId,
             testCode: trimTestCode(testType.testCode),
-            testDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
+            testDate: dateFormat(testType.testTypeStartTimestamp,'yyyy-mm-dd HH:MM:ss'),
             pNumber: testResult.testStationPNumber,
           };
         }
@@ -83,10 +83,13 @@ export const extractBookingDetails = (testResult: TestResult): Booking[] => {
       if (testResult.vrm) {
         return {
           name: testResult.testStationName,
-          bookingDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
+          bookingDate: dateFormat(
+            testResult.testStartTimestamp,
+            'yyyy-mm-dd HH:MM:ss',
+          ),
           vrm: testResult.vrm,
           testCode: trimTestCode(testType.testCode),
-          testDate: dateFormat(testResult.testStartTimestamp, 'isoDate'),
+          testDate: dateFormat(testType.testTypeStartTimestamp,'yyyy-mm-dd HH:MM:ss'),
           pNumber: testResult.testStationPNumber,
         };
       }

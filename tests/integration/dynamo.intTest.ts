@@ -42,7 +42,7 @@ describe('Handler integration test', () => {
     jest.clearAllMocks();
   });
 
-  it('receives valid dynamo stream event and puts transformed event on EventBridge', async () => {
+  it('receives valid dynamo stream event for non-trailer test results and puts transformed event on EventBridge', async () => {
     const event = GetDynamoStream(1);
 
     await handler(event);
@@ -67,6 +67,43 @@ describe('Handler integration test', () => {
           Source: config.aws.eventBusSource,
           Detail:
             '{"name":"Rowe, Wunsch and Wisoky","bookingDate":"2021-01-14 10:36:33","vrm":"JY58FPP","testCode":"LEC","testDate":"2021-01-14 10:36:33","pNumber":"87-1369569"}',
+          DetailType: 'CVS Test Booking',
+          EventBusName: config.aws.eventBusName,
+          Time: new Date('2022-01-01'),
+        },
+      ],
+    });
+
+    expect(logger.info).toHaveBeenLastCalledWith(
+      'Successfully sent 2 bookings to EventBridge',
+    );
+  });
+
+  it('receives valid dynamo stream event for trailer test result and puts transformed event on EventBridge', async () => {
+    const event = GetDynamoStream(2);
+
+    await handler(event);
+
+    expect(putEventsFn).toHaveBeenCalledTimes(2);
+    expect(putEventsFn).toHaveBeenNthCalledWith(1, <Entries>{
+      Entries: [
+        <EventEntry>{
+          Source: config.aws.eventBusSource,
+          Detail:
+            '{"name":"MyATF","bookingDate":"2021-01-14 10:36:33","trailerId":"C000001","testCode":"ART","testDate":"2021-01-14 10:36:33","pNumber":"87-1369569"}',
+          DetailType: 'CVS Test Booking',
+          EventBusName: config.aws.eventBusName,
+          Time: new Date('2022-01-01'),
+        },
+      ],
+    });
+
+    expect(putEventsFn).toHaveBeenNthCalledWith(2, <Entries>{
+      Entries: [
+        <EventEntry>{
+          Source: config.aws.eventBusSource,
+          Detail:
+            '{"name":"MyATF","bookingDate":"2021-01-14 10:36:33","trailerId":"C000001","testCode":"AAT","testDate":"2021-01-14 10:36:33","pNumber":"87-1369569"}',
           DetailType: 'CVS Test Booking',
           EventBusName: config.aws.eventBusName,
           Time: new Date('2022-01-01'),

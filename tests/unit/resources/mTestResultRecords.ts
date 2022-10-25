@@ -34,12 +34,18 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                         testCode: {
                           S: 'ffv2',
                         },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T15:36:33.987Z',
+                        },
                       },
                     },
                     {
                       M: {
                         testCode: {
                           S: 'lec',
+                        },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T10:36:33.987Z',
                         },
                       },
                     },
@@ -82,12 +88,18 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                         testCode: {
                           S: 'art',
                         },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-15T10:36:33.987Z',
+                        },
                       },
                     },
                     {
                       M: {
                         testCode: {
                           S: 'aat1',
+                        },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T10:36:33.987Z',
                         },
                       },
                     },
@@ -143,12 +155,18 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                         testCode: {
                           S: 'art',
                         },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-15T10:36:33.987Z',
+                        },
                       },
                     },
                     {
                       M: {
                         testCode: {
                           S: 'aat1',
+                        },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T10:36:33.987Z',
                         },
                       },
                     },
@@ -188,12 +206,18 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                         testCode: {
                           S: 'art',
                         },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-15T10:36:33.987Z',
+                        },
                       },
                     },
                     {
                       M: {
                         testCode: {
                           S: 'aat1',
+                        },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T10:36:33.987Z',
                         },
                       },
                     },
@@ -233,12 +257,18 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                         testCode: {
                           S: 'ffv2',
                         },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T10:36:33.987Z',
+                        },
                       },
                     },
                     {
                       M: {
                         testCode: {
                           S: 'lec',
+                        },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-15T10:36:33.987Z',
                         },
                       },
                     },
@@ -277,6 +307,9 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                       M: {
                         testCode: {
                           S: 'ffva',
+                        },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T10:36:33.987Z',
                         },
                       },
                     },
@@ -322,12 +355,18 @@ export const GetDynamoStream = (i: number): DynamoDBStreamEvent => {
                         testCode: {
                           S: 'ffv2',
                         },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T10:36:33.987Z',
+                        },
                       },
                     },
                     {
                       M: {
                         testCode: {
                           S: 'lec',
+                        },
+                        testTypeStartTimestamp: {
+                          S: '2021-01-14T10:36:33.987Z',
                         },
                       },
                     },

@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@joi/date": "^2.1.0",
+    "@joi/date": "^2.1.1",
     "aws-sdk": "^2.1209.0",
     "dateformat": "^4.6.3",
     "joi": "^17.6.0",
